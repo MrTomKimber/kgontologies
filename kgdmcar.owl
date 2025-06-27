@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#"
+     xml:base="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:kgnaming="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar">
+        <owl:imports rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsContainedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsContainedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment>The attribute on the entity that acts as a foreign key for this relationship,</rdfs:comment>
+        <rdfs:label>FromAttribute</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment>The class from which the relationship is referenced.</rdfs:comment>
+        <rdfs:label>FromClass</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment>The attribute on the referenced entity that acts as primary key within the context of this relationship.</rdfs:comment>
+        <rdfs:label>ToAttribute</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment>The class to which the relationship references.</rdfs:comment>
+        <rdfs:label>ToClass</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasDataType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasDataType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasSequenceNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasSequenceNumber">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsNullable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsNullable">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#NamedObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Domain</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namespace</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

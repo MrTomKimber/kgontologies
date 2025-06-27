@@ -1,0 +1,54 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kgn: <http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#> .
+
+kgn:NamedObjectShape a sh:NodeShape;
+    sh:targetClass kgn:NamedObject ;
+    sh:property kgn:isScopedWithinPropertyShape ;
+    sh:property kgn:FullyQualifiedNamePropertyShape ;
+    sh:property kgn:NamePropertyShape ;
+    sh:property kgn:ShortNamePropertyShape ;
+    sh:property kgn:LabelPropertyShape ;
+    sh:property kgn:DescriptionPropertyShape .
+    
+
+kgn:isScopedWithinPropertyShape a sh:PropertyShape ;
+    sh:path kgn:isScopedWithin ;
+    sh:maxCount 1 ;
+    sh:class kgn:NamedObjectShape .
+
+kgn:FullyQualifiedNamePropertyShape a sh:PropertyShape ;
+    sh:path kgn:FullyQualifiedName ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "(((^|[A-Za-z0-9_()]+[.])([A-Za-z0-9_()]+))+)$" .
+
+kgn:NamePropertyShape a sh:PropertyShape ;
+    sh:path kgn:Name ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "(((^|[A-Za-z0-9_()]+[.])([A-Za-z0-9_()]+))+)$" .
+
+kgn:ShortNamePropertyShape a sh:PropertyShape ;
+    sh:path kgn:ShortName ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^([A-Za-z0-9_()]+)$" .
+
+kgn:LabelPropertyShape a sh:PropertyShape ;
+    sh:path kgn:Label ;
+    sh:datatype xsd:string .
+
+kgn:DescriptionPropertyShape a sh:PropertyShape ;
+    sh:path kgn:Description ;
+    sh:datatype xsd:string .
+
+
+
+
