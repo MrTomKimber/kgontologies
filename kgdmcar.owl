@@ -171,9 +171,20 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
         <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:comment>A Class is a type of schema that conventionally describes a instances of a specific type of thing, concept or event.
+
+Classes can be participants in Relationships.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
     </owl:Class>
     
 
@@ -222,6 +233,18 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
         <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <rdfs:comment>A Schema is a flattened interface consisting of attributes and their datatypes. Additionally, valid-value constraints might be associated with a particular schema.</rdfs:comment>
+        <rdfs:comment>Schemas tend not to be defined as the end-points of Relationships, and their contents (at least conventially) tend to be less normalised.</rdfs:comment>
+        <rdfs:label>Schema</rdfs:label>
     </owl:Class>
 </rdf:RDF>
 
