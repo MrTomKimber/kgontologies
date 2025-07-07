@@ -209,7 +209,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
     </owl:Class>
     
@@ -290,6 +290,7 @@ Classes can be participants in Relationships.</rdfs:comment>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
         <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:comment>A Schema is a flattened interface consisting of attributes and their datatypes. Additionally, valid-value constraints might be associated with a particular schema.</rdfs:comment>
+        <rdfs:comment>A schema is often used as an intermediary format or expression between different models. It will often represent some core instance of a thing, along with all the specific properties and features of that thing. A Mapping is normally achieved between a model and a Schema.</rdfs:comment>
         <rdfs:comment>Schemas tend not to be defined as the end-points of Relationships, and their contents (at least conventially) tend to be less normalised.</rdfs:comment>
         <rdfs:label>Schema</rdfs:label>
     </owl:Class>
