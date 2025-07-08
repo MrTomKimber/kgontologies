@@ -1,0 +1,6 @@
+{
+    "workbench.editor.autoLockGroups": {
+        "mainThreadWebview-markdown.preview": true,
+        "workbench.editor.chatSession": false
+    }
+}
