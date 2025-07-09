@@ -1,2 +1,3 @@
 ide/
 __pycache__/
+*.xlsx#
