@@ -24,14 +24,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsContainedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsContainedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute">
@@ -80,6 +72,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -91,35 +91,26 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasDataType -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasDataType">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasSequenceNumber -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeHasSequenceNumber">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsNullable -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsNullable">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
@@ -194,6 +185,21 @@
     
 
 
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -224,14 +230,6 @@
 
 Classes can be participants in Relationships.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataType -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataType">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
     </owl:Class>
     
 
@@ -268,7 +266,6 @@ Classes can be participants in Relationships.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namespace</rdfs:label>
     </owl:Class>
     

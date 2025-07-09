@@ -101,6 +101,7 @@ The ontology sets up the notion of Namespaces, within which unique names are def
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#NamedObject"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Label</rdfs:label>
