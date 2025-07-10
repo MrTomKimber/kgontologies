@@ -1,0 +1,103 @@
+{
+    "GlobalVariables": {
+        "GlobalVariableName": "Value",
+        "SerialisationName": "ACMEBankStaff-Schema"
+    },
+    "NamedObjects": [
+        {
+            "TargetClass": "http://www.acmebank.org/Person",
+            "Instances": [
+                {
+                    "InstanceName": "Person",
+                    "SubjectTag": "StaffID",
+                    "ParentTag": null
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.acmebank.org/Department",
+            "Instances": [
+                {
+                    "InstanceName": "Department",
+                    "SubjectTag": "Department",
+                    "ParentTag": null
+                }
+            ]
+        }
+        
+    ],
+    "Relationships": [
+        {
+            "Predicate": "http://www.acmebank.org/WorksFor",
+            "Instances": [
+                {
+                    "InstanceName": "WorksFor",
+                    "SubjectTag": "StaffID",
+                    "ObjectTag": "Department"
+                }
+            ]
+        }
+    ],
+    "Properties": [
+        {
+            "Predicate": "http://www.acmebank.org/Name",
+            "Instances": [
+                {
+                    "InstanceName": "PersonName",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "Name"
+                },
+                {
+                    "InstanceName": "DepartmentName",
+                    "SubjectTag": "Department",
+                    "LiteralTag": "Department"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "Instances": [
+                {
+                    "InstanceName": "PersonLabel",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "Name"
+                },
+                {
+                    "InstanceName": "DepartmentLabel",
+                    "SubjectTag": "Department",
+                    "LiteralTag": "Department"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/Gender",
+            "Instances": [
+                {
+                    "InstanceName": "PersonGender",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "Gender"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/StartDay",
+            "Instances": [
+                {
+                    "InstanceName": "PersonStartDay",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "StartDay"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/StaffID",
+            "Instances": [
+                {
+                    "InstanceName": "PersonStaffID",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "StaffID"
+                }
+            ]
+        }
+    ]
+}

@@ -6,10 +6,10 @@ from rdflib.namespace import RDF, RDFS, OWL, SH
 import networkx as nx
 import uuid
 from itertools import cycle
-import colourschemes
+import src.colourschemes as colourschemes
 import numpy as np
 
-import graphloader
+import src.graphloader as graphloader
 
 
 def construct_property_table(entity_data):
