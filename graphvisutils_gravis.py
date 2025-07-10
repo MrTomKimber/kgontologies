@@ -55,10 +55,10 @@ def construct_property_table(entity_data):
 
 
 def rdflib_graph_to_networkx_for_gravis(rdflib_graph, 
+                                        ontology_context_graph=None,
                                         hide_types=False, 
                                         hide_literals=False, 
                                         hide_labels=True,
-                                        set_random_node_styles=True,
                                         node_colour_scheme=None, 
                                         edge_colour_scheme=None):
     """Construct a networkx graph with annotations matching those used by the gravis visualisation module.
@@ -78,7 +78,7 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
         if p in (RDF.type):
 
             if s not in entity_data_d:
-                entity_data_d[s] = graphloader.capture_entity_data(rdflib_graph, s)
+                entity_data_d[s] = graphloader.capture_entity_data(rdflib_graph, s, ontology_context_graph)
 
             if o in types:
                 types[o].add(s)
@@ -111,7 +111,7 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
                 if labels is None:
                     labels=[n.n3(rdflib_graph.namespace_manager)]
                 html_packet = construct_property_table(entity_data_d[n])
-                nx_g.add_node(n, label = "/".join(labels), shape=t_shape, color=tcolor, size=10, click=html_packet)
+                nx_g.add_node(n, label = "/n".join(labels), shape=t_shape, color=tcolor, size=10, click=html_packet)
     # Remaining Nodes are either Literals, or are Untyped Object Nodes
         # Cycle over Literals First.
     for l in literals:
