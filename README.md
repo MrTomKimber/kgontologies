@@ -44,8 +44,8 @@ This will result in a new shell environment being opened within your terminal wi
 
 `(kgontologies):$`
 
-[!NOTE]  
-N.B. Take note of the name of the new environment shown here in brackets as it may slightly deviate from this document. In later commands, you may need to adjust accordingly.
+> [!NOTE]  
+> N.B. Take note of the name of the new environment shown here in brackets as it may slightly deviate from this document. In later commands, you may need to adjust accordingly.
 
 Once your environment is up and running, a quick setup step to register the environment in jupyter might be necessary/useful, this can be done by running the command:
 
