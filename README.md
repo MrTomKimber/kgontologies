@@ -40,6 +40,13 @@ Pipenv will establish a virtual environment called `kgontologies` which can be l
 
 `pipenv shell` or similar (see your pipenv documentation for alternate options)
 
+This will result in a new shell environment being opened within your terminal window, the name of which will be shown in (brackets) at the prompt, looking something like:
+
+`(kgontologies):$`
+
+[!NOTE]  
+N.B. Take note of the name of the new environment shown here in brackets as it may slightly deviate from this document. In later commands, you may need to adjust accordingly.
+
 Once your environment is up and running, a quick setup step to register the environment in jupyter might be necessary/useful, this can be done by running the command:
 
 `python -m ipykernel install --user --name=kgontologies`
