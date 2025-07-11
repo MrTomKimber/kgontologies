@@ -18,7 +18,7 @@ One benefit of working with knowledge graphs is the potential ease of integratio
 
 Exploring a knowledge graph can be performed in many ways, *kgontologies* sets out some common, re-usable visualisation options to quickly turn a dataset into something that can be interacted with visually.
 
-![Image of a knowledge graph depicting staff and the departments they work in at an imaginary bank](../examples/acmestaff.png)
+![Image of a knowledge graph depicting staff and the departments they work in at an imaginary bank](examples/acmestaff.png)
 
 ### Validation
 
