@@ -36,7 +36,7 @@ Unzip the code to a preferred location, then run
 
 to setup a virtual python environment with dependencies listed in `Pipfile`. Note the specified version of python currently is `3.10` but at time of writing should be considered as `3.10 or greater` with no known breaking changes in later python versions. Consider editing the Pipfile if issues arise on installation.
 
-Pipenv will establish a virtual environment called `kgontologies` which can be launched from the command line with
+Pipenv will establish a virtual environment called `kgontologies` (or similar see note later) which can be launched from the command line with:
 
 `pipenv shell` or similar (see your pipenv documentation for alternate options)
 
