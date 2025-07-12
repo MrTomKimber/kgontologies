@@ -3,3 +3,5 @@ __pycache__/
 *.xlsx#
 catalog-v001.xml
 *.sqlite
+*.checkpoint.ipynb
+*.ipynb_checkpoints
