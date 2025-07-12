@@ -139,7 +139,7 @@ class NameMaster:
             remastered_graph.bind(ns_prefix, namespace)
 
         master_spec = self.master_spec_from_rdflib_graph(graph, naming_namespace)
-
+        print(f"{len(master_spec)} named entities to remaster in the graph.")
         # Cycle over all the named entities in the graph and update their URIs
         for s, p, o in graph.triples((None, None, None)):
             ms, mp, mo = master_spec.get(s, s), master_spec.get(p, p), master_spec.get(o, o)
@@ -149,6 +149,7 @@ class NameMaster:
     
     def master_graph(self, graph, naming_namespace="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"):
         remastered_graph = self.remaster_graph(graph, naming_namespace)
+
         key_values_to_master = self.fully_qualified_names_from_graph(remastered_graph, naming_namespace)
         update_report = self.set_values(key_values_to_master, safe=True)
         if update_report[0] > 0:
