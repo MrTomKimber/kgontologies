@@ -23,6 +23,16 @@
                     "ParentTag": null
                 }
             ]
+        },
+        {
+            "TargetClass": "http://www.acmebank.org/Role",
+            "Instances": [
+                {
+                    "InstanceName": "Role",
+                    "SubjectTag": "Role",
+                    "ParentTag": null
+                }
+            ]
         }
         
     ],
@@ -36,6 +46,22 @@
                     "ObjectTag": "Department"
                 }
             ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/HasRole",
+            "Instances": [
+                {
+                    "InstanceName": "PersonHasRole",
+                    "SubjectTag": "StaffID",
+                    "ObjectTag": "Role"
+                },
+                {
+                    "InstanceName": "DepartmentHasRole",
+                    "SubjectTag": "Department",
+                    "ObjectTag": "Role"
+                }
+            ]
+            
         }
     ],
     "Properties": [
@@ -66,6 +92,11 @@
                     "InstanceName": "DepartmentLabel",
                     "SubjectTag": "Department",
                     "LiteralTag": "Department"
+                },
+                {
+                    "InstanceName": "RoleLabel",
+                    "SubjectTag": "Role",
+                    "LiteralTag": "Role"
                 }
             ]
         },

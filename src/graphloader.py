@@ -263,17 +263,18 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
             for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
                 subject_fqn=".".join(get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec))
                 object_fqn=".".join(get_keylist_from_datarow(datarow, data_graph, obj_uqn_spec))
-                
-                if subject_fqn in fqn_catalog:
-                    subject_entity = fqn_catalog[subject_fqn].uri
-                else:
-                    print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
-                    assert False
-                if object_fqn in fqn_catalog:
-                    object_entity = fqn_catalog[object_fqn].uri
-                else:
-                    assert False
-                relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
+                if subject_fqn.strip() != "" and object_fqn.strip() != "":
+                    if subject_fqn in fqn_catalog:
+                        subject_entity = fqn_catalog[subject_fqn].uri
+                    else:
+                        print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
+                        assert False
+                    if object_fqn in fqn_catalog:
+                        object_entity = fqn_catalog[object_fqn].uri
+                    else:
+                        print(f"{object_fqn} not in fqn_catalog")
+                        assert False
+                    relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
                 
 
     literals_set=set()
@@ -290,15 +291,15 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
             
             for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
                 subject_fqn=".".join(get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec))
-                
-                if subject_fqn in fqn_catalog:
-                    subject_entity = fqn_catalog[subject_fqn].uri
-                else:
-                    assert False
-                literal_values = [r[2] for r in data_graph.triples((datarow, literaltag_spec, None))]
+                if subject_fqn.strip() != "":
+                    if subject_fqn in fqn_catalog:
+                        subject_entity = fqn_catalog[subject_fqn].uri
+                    else:
+                        assert False
+                    literal_values = [r[2] for r in data_graph.triples((datarow, literaltag_spec, None))]
 
-                for literal in literal_values:
-                    literals_set.add(DataLiteral(subject_entity, predicate_uri, literal))
+                    for literal in literal_values:
+                        literals_set.add(DataLiteral(subject_entity, predicate_uri, literal))
                 
     return entity_set, relationship_set, literals_set
 
