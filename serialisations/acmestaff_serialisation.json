@@ -80,15 +80,26 @@
             ]
         },
         {
-            "Predicate": "http://www.acmebank.org/StartDay",
+            "Predicate": "http://www.acmebank.org/StartDate",
             "Instances": [
                 {
-                    "InstanceName": "PersonStartDay",
+                    "InstanceName": "PersonStartDate",
                     "SubjectTag": "StaffID",
-                    "LiteralTag": "StartDay"
+                    "LiteralTag": "StartDate"
                 }
             ]
         },
+        {
+            "Predicate": "http://www.acmebank.org/EndDate",
+            "Instances": [
+                {
+                    "InstanceName": "PersonEndDate",
+                    "SubjectTag": "StaffID",
+                    "LiteralTag": "EndDate"
+                }
+            ]
+        },
+
         {
             "Predicate": "http://www.acmebank.org/StaffID",
             "Instances": [

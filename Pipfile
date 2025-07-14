@@ -12,6 +12,7 @@ rdflib = "*"
 gravis = "*"
 networkx = "*"
 openpyxl = "*"
+sqlitedict = "*"
 
 [dev-packages]
 
