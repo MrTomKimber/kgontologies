@@ -1,6 +1,6 @@
 from rdflib import Graph, Namespace, URIRef, BNode, Literal
 from rdflib.namespace import RDF, RDFS, OWL, SH
-
+import pandas as pd
 import uuid
 import numpy as np
 from hashlib import md5
@@ -18,7 +18,11 @@ def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
         g.add(( DATA[f"column({c})"], RDFS.label, Literal(c) )) # Attach a simple label to the datatype property
         g.add((DATA.row, DATA.has_field, DATA[f"column({c})"]))
 
-    for row_i,data in dataframe.replace(np.nan, None).iterrows():
+    for row_i,data in dataframe.replace({np.nan: None,
+                                         pd.NaT: None,
+                                         pd.NA: None,
+                                         "": None
+                                         }).iterrows():
         row_url = DATA[uuid.uuid4().hex]
         row_index = Literal(row_i)
         g.add((row_url, RDF.type, DATA.row))
@@ -109,6 +113,8 @@ def build_naming_lineage_hierarchy(configuration):
             subjecttag = instance['SubjectTag']
             parenttag = instance['ParentTag']
             name_links[iname]=parenttag
+
+    print(name_links)
     return name_links
 
 def traverse_hierarchy_path(hdict, start, acc=None):
@@ -261,21 +267,25 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
             obj_uqn_spec = [DATA[f"column({t})"] for t in traverse_hierarchy_path(hdict, objecttag)[::-1]]
             
             for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
-                subject_fqn=".".join(get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec))
-                object_fqn=".".join(get_keylist_from_datarow(datarow, data_graph, obj_uqn_spec))
-                if subject_fqn.strip() != "" and object_fqn.strip() != "":
-                    if subject_fqn in fqn_catalog:
-                        subject_entity = fqn_catalog[subject_fqn].uri
-                    else:
-                        print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
-                        assert False
-                    if object_fqn in fqn_catalog:
-                        object_entity = fqn_catalog[object_fqn].uri
-                    else:
-                        print(f"{object_fqn} not in fqn_catalog")
-                        assert False
-                    relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
-                
+                raw_subject_fqn=get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec)
+                raw_object_fqn=get_keylist_from_datarow(datarow, data_graph, obj_uqn_spec)
+                if len(raw_subject_fqn)==len(subj_uqn_spec) and len(raw_object_fqn)==len(obj_uqn_spec):
+                    subject_fqn=".".join(raw_subject_fqn)
+                    object_fqn=".".join(raw_object_fqn)
+                    if subject_fqn.strip() != "" and object_fqn.strip() != "":
+                        if subject_fqn in fqn_catalog:
+                            subject_entity = fqn_catalog[subject_fqn].uri
+                        else:
+                            print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
+                            assert False
+                        if object_fqn in fqn_catalog:
+                            object_entity = fqn_catalog[object_fqn].uri
+                        else:
+                            print(f"{object_fqn} not in fqn_catalog")
+                            assert False
+
+                        relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
+                    
 
     literals_set=set()
     

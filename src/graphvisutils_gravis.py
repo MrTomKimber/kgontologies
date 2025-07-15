@@ -8,6 +8,7 @@ import uuid
 from itertools import cycle
 import src.colourschemes as colourschemes
 import numpy as np
+import pandas as pd
 
 import src.graphloader as graphloader
 
@@ -65,12 +66,14 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
     hide_types controls whether type-like nodes are shown as nodes, or just used as styling cues
     hide_literals controls whether all literal values are projected into the graph, or are attached to nodes property-graph style
     """
-    nx_g = nx.MultiDiGraph()
+    
     n_set, p_set = set(), set()
     types = dict()
+    rev_types = dict() # A reverse dictionary node to types
     object_types = dict()
     literals = set()
-    entity_data_d=dict()
+    entity_data_d=dict() # A dictionary of typed objects
+    
     for s,p,o in rdflib_graph.triples((None, None, None)):
         n_set.add(s)
         p_set.add(p)
@@ -79,6 +82,10 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
 
             if s not in entity_data_d:
                 entity_data_d[s] = graphloader.capture_entity_data(rdflib_graph, s, ontology_context_graph)
+            if s not in rev_types:
+                rev_types[s] = set([o])
+            else:
+                rev_types[s].add(o) 
 
             if o in types:
                 types[o].add(s)
@@ -96,9 +103,17 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
     n_c_cycle = colourschemes.gen_cycle(node_colour_scheme)
     e_c_cycle = colourschemes.gen_cycle(edge_colour_scheme)    
     n_s_cycle = cycle(['circle', 'rectangle', 'hexagon'])
+    types["Untyped"]=set()
+    for n in n_set:
+        if isinstance(n, URIRef) and n not in rev_types:
+            types["Untyped"].add(n)
+            entity_data_d[n] = graphloader.capture_entity_data(rdflib_graph, n, ontology_context_graph)
 
+
+    nx_g = nx.MultiDiGraph()
     # Cycle over Typed Nodes (Entities)
     for t,nodes in types.items():
+
         tcolor=next(n_c_cycle)
         t_shape = next(n_s_cycle)
         if hide_types and t in (RDF.type):
@@ -106,19 +121,24 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
             pass
         else:
             for n in nodes:
-                # Get Label for Node
-                labels = entity_data_d.get(n).get('labels')
-                if labels is None:
-                    labels=[n.n3(rdflib_graph.namespace_manager)]
-                html_packet = construct_property_table(entity_data_d[n])
-                nx_g.add_node(n, label = "/n".join(labels), shape=t_shape, color=tcolor, size=10, click=html_packet)
+                if isinstance(n, URIRef):
+                    # Get Label for Node
+                    labels = entity_data_d.get(n).get('labels')
+                    if labels is None:
+                        labels=[n.n3(rdflib_graph.namespace_manager)]
+                    html_packet = construct_property_table(entity_data_d[n])
+                    nx_g.add_node(n, label = "/n".join(labels), shape=t_shape, color=tcolor, size=10, click=html_packet)
     # Remaining Nodes are either Literals, or are Untyped Object Nodes
         # Cycle over Literals First.
     for l in literals:
         if not hide_literals:
-            label = l.value
-            nx_g.add_node(l, label = label, shape='circle', color='gray')
+            label = str(l.value)
+            if not isinstance(l.value, pd.Timestamp):
+                nx_g.add_node(str(l.value), label=label, shape='circle', color='gray')
+            else:
+                nx_g.add_edge(s,f"{l.value.isoformat()}",label=label, shape='circle', color='gray')
 
+            #print(l, type(l.value), label)
     # Cycle over Edges
     for p in p_set:
         p_colour = next(e_c_cycle)
@@ -128,12 +148,25 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
                 pass
             elif hide_literals and o in literals:
                 pass
-            elif hide_labels and p in (RDFS.label):
-                # No need to show labels as separate nodes
-                pass
             else:
                 labels = entity_data_d.get(pp,{}).get('labels')
                 if labels is None:
                     labels=[pp.n3(rdflib_graph.namespace_manager)]
-                nx_g.add_edge(s,o,label="/".join(labels), color=p_colour)
+                if isinstance(o, Literal):
+                    
+                    if not isinstance(o.value, str):
+                        if isinstance(o.value, pd.Timestamp):
+
+                            nx_g.add_edge(s,f"{o.value.isoformat()}",label="/".join(labels), shape='circle', color='gray')
+                        else:
+                            print( o.value, type(o.value))
+                            nx_g.add_edge(s,str(o.value),label="/".join(labels), color=p_colour)
+                    else:
+                        nx_g.add_edge(s,o.value,label="/".join(labels), color=p_colour)
+                else:
+                    if s==o:
+                        print(f"Warning: self-loop detected for {s} with predicate {p}")
+                        print((s,pp,o))
+                    nx_g.add_edge(s,o,label="/".join(labels), color=p_colour)
+                    
     return nx_g

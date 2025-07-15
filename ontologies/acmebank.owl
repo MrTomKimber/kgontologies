@@ -9,6 +9,7 @@
      xmlns:kgnaming="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
     <owl:Ontology rdf:about="http://www.acmebank.org/">
         <owl:imports rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"/>
+        <rdfs:comment>A simple example ontology describing an imagined bank&apos;s operational architecture.</rdfs:comment>
     </owl:Ontology>
     
 
@@ -35,6 +36,14 @@
     <!-- http://www.acmebank.org/Generates -->
 
     <owl:ObjectProperty rdf:about="http://www.acmebank.org/Generates">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.acmebank.org/HasRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.acmebank.org/HasRole">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </owl:ObjectProperty>
     

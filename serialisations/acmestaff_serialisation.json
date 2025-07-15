@@ -30,7 +30,7 @@
                 {
                     "InstanceName": "Role",
                     "SubjectTag": "Role",
-                    "ParentTag": null
+                    "ParentTag": "Department"
                 }
             ]
         }
