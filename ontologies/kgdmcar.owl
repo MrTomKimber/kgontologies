@@ -25,6 +25,46 @@
     
 
 
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute">
@@ -45,6 +85,14 @@
         <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
         <rdfs:comment>The class from which the relationship is referenced.</rdfs:comment>
         <rdfs:label>FromClass</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
     </owl:ObjectProperty>
     
 

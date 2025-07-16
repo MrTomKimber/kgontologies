@@ -309,7 +309,7 @@
     ],
     "Relationships": [
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberofParentDomain",
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain",
             "Instances": [
                 {
                     "InstanceName": "DomainIsMemberOfParentDomain",
@@ -367,7 +367,7 @@
                 }]
         },
 
-        
+
         {
             "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#isScopedWithin",
             "Instances": [
