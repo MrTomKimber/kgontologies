@@ -1,0 +1,457 @@
+{
+    "$schema": "./serialisationschema.json",
+    "Namespaces": {
+        "DMCAR": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#",
+        "KGNAM": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"
+    },
+    "GlobalVariables": {
+        "GlobalVariableName": "Value",
+        "SerialisationName": "DMCAR-Schema"
+    },
+    "NamedObjects": [
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace",
+            "Instances": [
+                {
+                    "InstanceName": "Namespace",
+                    "ParentTag": null,
+                    "SubjectTag": "Namespace"
+                },
+                {
+                    "InstanceName": "DomainNamespace",
+                    "ParentTag": null,
+                    "SubjectTag": "DomainNamespace"
+                },
+                {
+                    "InstanceName": "RelationshipClassFromNamespace",
+                    "ParentTag": null,
+                    "SubjectTag": "FromNamespace"
+                },
+                {
+                    "InstanceName": "RelationshipClassToNamespace",
+                    "ParentTag": null,
+                    "SubjectTag": "ToNamespace"
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain",
+            "Instances": [
+                {
+                    "InstanceName": "Domain",
+                    "ParentTag": "DomainNamespace",
+                    "SubjectTag": "Domain"
+                },
+                {
+                    "InstanceName": "ParentDomain",
+                    "ParentTag": "DomainNamespace",
+                    "SubjectTag": "ParentDomain"
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model",
+            "Instances": [
+                {
+                    "InstanceName": "Model",
+                    "ParentTag": "Namespace",
+                    "SubjectTag": "Model"
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class",
+            "Instances": [
+                {
+                    "InstanceName": "Class",
+                    "ParentTag": "Namespace",
+                    "SubjectTag": "Class"
+                },
+                {
+                    "InstanceName": "FromClass",
+                    "ParentTag": "FromNamespace",
+                    "SubjectTag": "FromClass"
+                },
+                {
+                    "InstanceName": "ToClass",
+                    "ParentTag": "ToNamespace",
+                    "SubjectTag": "ToClass"
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute",
+            "Instances": [
+                {
+                    "InstanceName": "Attribute",
+                    "ParentTag": "Class",
+                    "SubjectTag": "Attribute"
+                },
+                {
+                    "InstanceName": "FromAttribute",
+                    "ParentTag": "FromClass",
+                    "SubjectTag": "FromAttribute"
+                },
+                {
+                    "InstanceName": "ToAttribute",
+                    "ParentTag": "ToClass",
+                    "SubjectTag": "ToAttribute"
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship",
+            "Instances": [
+                {
+                    "InstanceName": "Relationship",
+                    "ParentTag": "Namespace",
+                    "SubjectTag": "Relationship"
+                }
+            ]
+        }
+    ],
+    "Properties": [
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name",
+            "Instances": [
+                {
+                    "InstanceName": "NamespaceName",
+                    "SubjectTag": "Namespace",
+                    "LiteralTag": "Namespace"
+                },
+                {
+                    "InstanceName": "DomainName",
+                    "SubjectTag": "Domain",
+                    "LiteralTag": "Domain"
+                },
+                {
+                    "InstanceName": "ModelName",
+                    "SubjectTag": "Model",
+                    "LiteralTag": "Model"
+                },
+                {
+                    "InstanceName": "ClassName",
+                    "SubjectTag": "Class",
+                    "LiteralTag": "Class"
+                },
+                {
+                    "InstanceName": "AttributeName",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "Attribute"
+                },
+                {
+                    "InstanceName": "RelationshipName",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "Relationship"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label",
+            "Instances": [
+                {
+                    "InstanceName": "NamespaceLabel",
+                    "SubjectTag": "Namespace",
+                    "LiteralTag": "NamespaceLabel"
+                },
+                {
+                    "InstanceName": "DomainLabel",
+                    "SubjectTag": "Domain",
+                    "LiteralTag": "DomainLabel"
+                },
+                {
+                    "InstanceName": "ModelLabel",
+                    "SubjectTag": "Model",
+                    "LiteralTag": "ModelLabel"
+                },
+                {
+                    "InstanceName": "ClassLabel",
+                    "SubjectTag": "Class",
+                    "LiteralTag": "ClassLabel"
+                },
+                {
+                    "InstanceName": "AttributeLabel",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "AttributeLabel"
+                },
+                {
+                    "InstanceName": "RelationshipLabel",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "RelationshipLabel"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Description",
+            "Instances": [
+                {
+                    "InstanceName": "NamespaceDescription",
+                    "SubjectTag": "Namespace",
+                    "LiteralTag": "NamespaceDescription"
+                },
+                {
+                    "InstanceName": "DomainDescription",
+                    "SubjectTag": "Domain",
+                    "LiteralTag": "DomainDescription"
+                },
+                {
+                    "InstanceName": "ModelDescription",
+                    "SubjectTag": "Model",
+                    "LiteralTag": "ModelDescription"
+                },
+                {
+                    "InstanceName": "ClassDescription",
+                    "SubjectTag": "Class",
+                    "LiteralTag": "ClassDescription"
+                },
+                {
+                    "InstanceName": "AttributeDescription",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "AttributeDescription"
+                },
+                {
+                    "InstanceName": "RelationshipDescription",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "RelationshipDescription"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType",
+            "Instances": [
+                {
+                    "InstanceName": "ModelHasType",
+                    "SubjectTag": "Model",
+                    "LiteralTag": "ModelType"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber",
+            "Instances": [
+                {
+                    "InstanceName": "AttributeSequenceNumber",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "Sequence"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName",
+            "Instances": [
+                {
+                    "InstanceName": "AttributeDataTypeName",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "DataType"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints",
+            "Instances": [
+                {
+                    "InstanceName": "AttributeValueConstraints",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "ValueConstraints"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable",
+            "Instances": [
+                {
+                    "InstanceName": "AttributeIsNullable",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "Nulls"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK",
+            "Instances": [
+                {
+                    "InstanceName": "AttributeIsPK",
+                    "SubjectTag": "Attribute",
+                    "LiteralTag": "IsPK"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipHasType",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "RelationshipType"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipFromCardinality",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "FromCardinality"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipToCardinality",
+                    "SubjectTag": "Relationship",
+                    "LiteralTag": "ToCardinality"
+                }
+            ]
+        }
+    ],
+    "Relationships": [
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberofParentDomain",
+            "Instances": [
+                {
+                    "InstanceName": "DomainIsMemberOfParentDomain",
+                    "SubjectTag": "Domain",
+                    "ObjectTag": "ParentDomain"
+                }]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain",
+            "Instances": [
+                {
+                    "InstanceName": "ClassIsMemberOfDomain",
+                    "SubjectTag": "Class",
+                    "ObjectTag": "Domain"
+                }]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel",
+            "Instances": [
+
+                {
+                    "InstanceName": "ClassIsMemberOfModel",
+                    "SubjectTag": "Class",
+                    "ObjectTag": "Model"
+                }]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel",
+            "Instances": [
+
+                {
+                    "InstanceName": "RelationshipIsMemberOfModel",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "Model"
+                }]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass",
+            "Instances": [
+
+                {
+                    "InstanceName": "AttributeIsMemberOfClass",
+                    "SubjectTag": "Attribute",
+                    "ObjectTag": "Class"
+                }]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema",
+            "Instances": [
+
+                {
+                    "InstanceName": "AttributeIsMemberOfSchema",
+                    "SubjectTag": "Attribute",
+                    "ObjectTag": "Schema"
+                }]
+        },
+
+        
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#isScopedWithin",
+            "Instances": [
+                {
+                    "InstanceName": "DomainIsScopedWithinDomainNamespace",
+                    "SubjectTag": "Domain",
+                    "ObjectTag": "DomainNamespace"
+                },
+                {
+                    "InstanceName": "ClassIsScopedWithinNamespace",
+                    "SubjectTag": "Class",
+                    "ObjectTag": "Namespace"
+                },
+                {
+                    "InstanceName": "RelationshipIsScopedWithinNamespace",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "Namespace"
+                },
+                {
+                    "InstanceName": "AttributeIsScopedWithinClass",
+                    "SubjectTag": "Attribute",
+                    "ObjectTag": "Class"
+                },
+                {
+                    "InstanceName": "FromClassIsScopedWithinFromNamespace",
+                    "SubjectTag": "FromClass",
+                    "ObjectTag": "FromNamespace"
+                },
+                {
+                    "InstanceName": "ToClassIsScopedWithinToNamespace",
+                    "SubjectTag": "ToClass",
+                    "ObjectTag": "ToNamespace"
+                },
+                {
+                    "InstanceName": "FromAttributeIsScopedWithinFromClass",
+                    "SubjectTag": "FromAttribute",
+                    "ObjectTag": "FromClass"
+                },
+                {
+                    "InstanceName": "ToAttributeIsScopedWithinToClass",
+                    "SubjectTag": "ToAttribute",
+                    "ObjectTag": "ToClass"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipFromClass",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "FromClass"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipToClass",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "ToClass"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipFromAttribute",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "FromAttribute"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute",
+            "Instances": [
+                {
+                    "InstanceName": "RelationshipToAttribute",
+                    "SubjectTag": "Relationship",
+                    "ObjectTag": "ToAttribute"
+                }
+            ]
+        }
+    ]
+}

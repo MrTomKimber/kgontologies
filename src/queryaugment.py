@@ -61,6 +61,14 @@ def augment_query_results(source_graph,
             entity_data=entity_data.union(set(object_filter))
     return entity_data
 
+def filter_triples_from_graph_on_predicate(graph, node_filter_set, predicate_filter_set):
+    new_g = Graph()
+    
+    for s,p,o in graph.triples((None, None, None)):
+        if p not in predicate_filter_set and s not in node_filter_set and o not in node_filter_set:
+            new_g.add((s,p,o))
+    return new_g
+
 def get_type_triples(graph, subject, sparql_option=True):
     """Given an RDF graph and a subject, return all type triples for that subject."""
     type_triples = []

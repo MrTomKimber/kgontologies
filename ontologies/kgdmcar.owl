@@ -6,7 +6,8 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:kgnaming="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
+     xmlns:dmcar="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#"
+     xmlns:kgnam="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar">
         <owl:imports rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"/>
     </owl:Ontology>
@@ -215,7 +216,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
     </owl:Class>
     
@@ -225,7 +226,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:comment>A Class is a type of schema that conventionally describes a instances of a specific type of thing, concept or event.
 
 Classes can be participants in Relationships.</rdfs:comment>
@@ -246,7 +247,7 @@ Classes can be participants in Relationships.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Domain</rdfs:label>
     </owl:Class>
     
@@ -256,7 +257,7 @@ Classes can be participants in Relationships.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
     </owl:Class>
     
@@ -275,7 +276,7 @@ Classes can be participants in Relationships.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
     </owl:Class>
     
@@ -285,7 +286,7 @@ Classes can be participants in Relationships.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnaming:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
         <rdfs:comment>A Schema is a flattened interface consisting of attributes and their datatypes. Additionally, valid-value constraints might be associated with a particular schema.</rdfs:comment>
         <rdfs:comment>A schema is often used as an intermediary format or expression between different models. It will often represent some core instance of a thing, along with all the specific properties and features of that thing. A Mapping is normally achieved between a model and a Schema.</rdfs:comment>
         <rdfs:comment>Schemas tend not to be defined as the end-points of Relationships, and their contents (at least conventially) tend to be less normalised.</rdfs:comment>
