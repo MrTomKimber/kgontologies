@@ -1,0 +1,125 @@
+{   "$schema": "./serialisationschema.json",
+    "GlobalVariables": {
+        "GlobalVariableName": "Value",
+        "SerialisationName": "ACMEBankStaff-Schema"
+    },
+    "NamedObjects": [
+        {
+            "TargetClass": "http://www.acmebank.org/Person",
+            "Instances": [
+                {
+                    "InstanceName": "Person",
+                    "SubjectTag": "Employee Id",
+                    "ParentTag": null
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.acmebank.org/Department",
+            "Instances": [
+                {
+                    "InstanceName": "Department",
+                    "SubjectTag": "Department",
+                    "ParentTag": null
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.acmebank.org/Role",
+            "Instances": [
+                {
+                    "InstanceName": "Role",
+                    "SubjectTag": "Job Role",
+                    "ParentTag": "Department"
+                }
+            ]
+        }
+        
+    ],
+    "Relationships": [
+        {
+            "Predicate": "http://www.acmebank.org/WorksFor",
+            "Instances": [
+                {
+                    "InstanceName": "WorksFor",
+                    "SubjectTag": "Employee Id",
+                    "ObjectTag": "Department"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/ReportsTo",
+            "Instances": [
+                {
+                    "InstanceName": "WorksFor",
+                    "SubjectTag": "Employee Id",
+                    "ObjectTag": "Reports To"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.acmebank.org/HasRole",
+            "Instances": [
+                {
+                    "InstanceName": "PersonHasRole",
+                    "SubjectTag": "Employee Id",
+                    "ObjectTag": "Job Role"
+                },
+                {
+                    "InstanceName": "DepartmentHasRole",
+                    "SubjectTag": "Department",
+                    "ObjectTag": "Job Role"
+                }
+            ]
+            
+        }
+    ],
+    "Properties": [
+        {
+            "Predicate": "http://www.acmebank.org/Name",
+            "Instances": [
+                {
+                    "InstanceName": "PersonName",
+                    "SubjectTag": "Employee Id",
+                    "LiteralTag": "Name"
+                },
+                {
+                    "InstanceName": "DepartmentName",
+                    "SubjectTag": "Department",
+                    "LiteralTag": "Department"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "Instances": [
+                {
+                    "InstanceName": "PersonLabel",
+                    "SubjectTag": "Employee Id",
+                    "LiteralTag": "Name"
+                },
+                {
+                    "InstanceName": "DepartmentLabel",
+                    "SubjectTag": "Department",
+                    "LiteralTag": "Department"
+                },
+                {
+                    "InstanceName": "RoleLabel",
+                    "SubjectTag": "Job Role",
+                    "LiteralTag": "Job Role"
+                }
+            ]
+        },
+
+        {
+            "Predicate": "http://www.acmebank.org/StaffID",
+            "Instances": [
+                {
+                    "InstanceName": "PersonStaffID",
+                    "SubjectTag": "Employee Id",
+                    "LiteralTag": "Employee Id"
+                }
+            ]
+        }
+    ]
+}
