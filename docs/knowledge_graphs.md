@@ -6,9 +6,9 @@ A knowledge graph is a network of connected concepts used to model knowledge abo
 
 Information is transformed into a structured network of interconnected facts, enabling better understanding, discovery and analysis of relationships.
 
-Knowledge graphs can be defined as $G = \{E,R,F\}$, where $E$ is a collection of Entities, concepts, objects, things or events - $R$ is the set of all possible Relations that can occur between the entities, and $F$ is the set of facts that records how the Entities are Related to one another.
+Knowledge graphs can be defined as $G = \lbrace E,R,F \rbrace$, where $E$ is a collection of Entities, (concepts, objects, things or events) - $R$ is the set of all possible Relations that can occur between the entities, and $F$ is the set of facts that records how the Entities are Related to one another.
 
-A fact $F$ is defined as $F=\{h,r,t\}$ where $h \in E$ is an entity at the head of the relationship, $t \in E$ is the entity at the tail of the relationship and $r \in R$ is the specific directional relationship that links the two entities together.
+A fact $F$ is defined as $F=\lbrace h,r,t \rbrace$ where $h \in E$ is an entity at the head of the relationship, $t \in E$ is the entity at the tail of the relationship and $r \in R$ is the specific directional relationship that links the two entities together.
 
 These facts are sometimes known as *triples* and can also be denoted using the *SPO* notation $T = (s,p,o)$ where $T$ is a triple (or Fact), $s \in E$ is the *Subject*, $p \in R$ is the *Predicate*, and $o \in E$ is the *Object* of the triple.
 
@@ -17,11 +17,15 @@ A fact in this format encodes the most atomic unit of knowledge possible, and wi
 e.g.
 >The cat sat on the mat.
 
-Becomes: `T = (TheCat, SatOn, TheMat)`
+Becomes: `T = (TheCat, satOn, TheMat)`
 
-Where *TheCat* is the subject of the triple, *TheMat* is the object, and they are connected by the directional *SatOn* relationship.
+Where *TheCat* is the subject of the triple, *TheMat* is the object, and they are connected by the directional *satOn* relationship.
 
-## Comparison to a Relational Model
+![Depiction of a simple triple showing TheCat ---satOn---> TheMat](images/kg_triple_example_cat_sat_mat.png)
+
+Any fact or atom of knowledge can be represented in this way, and a collection of such facts can be considered a *knowledge graph*.
+
+## Comparison to the traditional Relational Model
 
 In a relational (tabular) database, knowledge is encoded in rows and columns, where connected facts or properties for similarly classified objects are defined as columns which are collected together in class-specific table definitions, as data is added, rows of these tables will contain information for each instance of a given class.
 
@@ -33,13 +37,17 @@ Take the example of a database table containing details of *Members of Staff*. T
 | ONIC007 | Mishka | 01-08-2009 | Accountant      | Finance    |
 | ONIC012 | Sally  | 12-03-2011 | Account Manager | Sales      |
 
-Each row describes a single *Member of Staff* in terms of the relations and properties they have.
+Each row describes a single *Member of Staff* in terms of the relations and properties defined by the table definition.
 
-A common/useful way of representing these new facts is visually in a *graph*. The entities we reference become the nodes, and the predicates become labelled edges that link between them. Taking the data for a single entity, we can generate the following diagram for a single member of staff.
+We can transform this information into the atomic facts they represent. Lets do this for the first row of data in the above table.
+
+A common/useful way of representing these new facts is visually in a *graph*. The entities we reference become the nodes, and the predicates become labelled edges that link between them. 
 
 ![Diagram of the ONIC004 entity showing all the data captured about them](images/kg_entity_data_example.png)
 
+Lets continue the process and convert the entire table into a knowledge graph:
 
+![A simple knowledge graph depicting the content of the MembersOfStaff table](images/kg_staff_table_graph.png)
 
 Behind the scenes, the tabular data we started with has been melted down to a series of facts, described in minimal SPO-form.
 The two datasets are equivalent, but the second one is in knowledge-graph compliant SPO format.
@@ -72,11 +80,7 @@ At first glance, this might raise an eyebrow, we've just gone from a simple tabl
 
 Whilst we've increased the number of rows we have to deal with, the advantage gained is that we've established a singular generic structure, (Subject, Predicate, Object), into which we can map *any* data from *any* source.
 
-This is extremely useful when attempting to integrate data from multiple sources.
-
-The general mapping from tabular to triple format often follows a pattern outlined below:
-
-![Diagram of tabular to graph format](images/kg_table_transform.png)
+This is extremely useful when integrating data from multiple sources.
 
 Data covering domains of interest will tend to be isolated in their own siloed datastores in which data will be partitioned by class into their respective tables, each holding details for a specific class of entity.
 
@@ -107,5 +111,8 @@ We can apply the same transformation to this table to convert it into a full set
 
 Since these triples also follow the same singular SPO convention as before, they can be added to the set of triples that referenced the Staff, together forming a larger unified store containing knowledge of Staff and the Departments they work in.
 
-As more data is integrated into the graph, the knowledge captured becomes richer and more complete. Previous barriers to integration, like differing schemas and isolated datastores are overcome and the valuable information they hold becomes available to all.
+![Diagram of the combined staff and departments knowledge extracted from tables](images/kg_staff_and_departments.png)
 
+
+
+As more data is integrated into the graph, the knowledge captured becomes richer and more complete. Previous barriers to integration, like differing schemas and isolated datastores are overcome and the valuable information they hold becomes available to all.
