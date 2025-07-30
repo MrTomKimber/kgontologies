@@ -28,7 +28,9 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
     </owl:ObjectProperty>
     
 
@@ -37,6 +39,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
     </owl:ObjectProperty>
     
 
@@ -45,6 +49,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
     </owl:ObjectProperty>
     
 
@@ -53,6 +59,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
     </owl:ObjectProperty>
     
 
@@ -61,6 +69,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
     </owl:ObjectProperty>
     
 
@@ -93,6 +103,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
     </owl:ObjectProperty>
     
 
@@ -144,6 +156,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
@@ -161,6 +174,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
@@ -170,6 +184,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
     </owl:DatatypeProperty>
     
 
@@ -204,6 +219,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
     </owl:DatatypeProperty>
     
 
@@ -238,6 +254,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
     
@@ -245,7 +262,10 @@
 
     <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 

@@ -4,7 +4,9 @@
 
 [Knowledge Graphs](docs/knowledge_graphs.md) provide a functionally rich framework for working with, presenting and sharing information. In particular the W3C implementation recommendations for knowledge graphs unlock capabilities supported by a wide range of (often) open-source tooling solutions. These include advanced modelling, documentation, query, analysis, inference and data-quality tools for little or no cost.
 
-The learning curve however is reasonably steep - this package seeks to address that with documentation and tooling to help support the development and creation of W3C compliant knowledge-graphs, providing tools to support [serialisation](docs/serialisation.md), [mastering](docs/kg_mastering.md) and [visualisation](docs/kg_visualisation.md).
+As such, W3C-style knowledge graphs provide a great opportunity to build expressive, robust and maintainable knowledge stores. Thus delivering benefits of greater integration and more cohesive understanding among participating parties.
+
+The learning curve however can be seen as being reasonably steep - this package seeks to address that with documentation, tooling and some unofficial "rules-of-thumb" to help support the development and creation of W3C compliant knowledge-graphs, providing tools to support [serialisation](docs/serialisation.md), [mastering](docs/kg_mastering.md) and [visualisation](docs/kg_visualisation.md).
 
 ## Outline
 

@@ -113,6 +113,28 @@ Since these triples also follow the same singular SPO convention as before, they
 
 ![Diagram of the combined staff and departments knowledge extracted from tables](images/kg_staff_and_departments.png)
 
-
-
 As more data is integrated into the graph, the knowledge captured becomes richer and more complete. Previous barriers to integration, like differing schemas and isolated datastores are overcome and the valuable information they hold becomes available to all.
+
+## Applications
+
+Knowledge graphs built in this way can be put to multiple uses. 
+
+### Knowledge Sharing
+
+Complex domains can be difficult to become attuned to, so for new starters on a project, team or organisation, it can be useful to be able to explore the information and knowledge that describes the domain or activity they will be participating in.
+
+Often this data will already be available in the organisation, but often will be siloed into functionally-separate tools or applications. These might include:
+
+* HR System - holding names and ids of staff, with perhaps line-manager information, role and departmental information.
+
+* CRM System - holding details of customers, suppliers and other 3rd party contacts with perhaps some history of dealings with each party.
+
+* Projects System - containing details of individual projects, either internally or externally, with details of who worked on them, project cost, duration and outcomes. 
+
+* Application Repository - listing systems and applications that are active within the organisation, perhaps including owners, maintenance costs
+
+* Domain Knowledge - any (often unstructured) documentation covering the concepts and workings of the domain covered, jargon used and processes followed as part of running the business
+
+And so on, normally the information located in each of these systems is proprietary and can be difficult to access - often requiring access to multiple systems and having to learn how to operate each of them. For very large organisations, there may be multiple instances of each of the above, to cater for differing lines of business or other organisational partitioning reasons.
+
+Extracting the core data from each system and populating a holistic knowledge graph can help link up the data spread across multiple systems and silos, and make it available in a single place for analysis and query. Additionally, because the W3C implementation recommendations support federated knowledge sharing, this task can be distributed out to the teams responsible for each data set to enable rapid adoption and benefit resolution.
