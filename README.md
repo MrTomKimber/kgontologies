@@ -2,7 +2,7 @@
 
 ## Context
 
-[Knowledge Graphs](docs/knowledge_graphs.md) provide a functionally rich framework for working with, presenting and sharing information. In particular the W3C implementation recommendations for knowledge graphs unlock a capabilities supported by a wide range of (often) open-source tooling solutions. These include advanced modelling, documentation, query, analysis, inference and data-quality tools for little or no cost.
+[Knowledge Graphs](docs/knowledge_graphs.md) provide a functionally rich framework for working with, presenting and sharing information. In particular the W3C implementation recommendations for knowledge graphs unlock capabilities supported by a wide range of (often) open-source tooling solutions. These include advanced modelling, documentation, query, analysis, inference and data-quality tools for little or no cost.
 
 The learning curve however is reasonably steep - this package seeks to address that with documentation and tooling to help support the development and creation of W3C compliant knowledge-graphs, providing tools to support [serialisation](docs/serialisation.md), [mastering](docs/kg_mastering.md) and [visualisation](docs/kg_visualisation.md).
 
@@ -19,6 +19,13 @@ Marking-up and converting data into RDF can be a difficult process, *kgontologie
 ### Entity Resolution and Mastering
 
 One benefit of working with knowledge graphs is the potential ease of integration between different data sets, but this can depend on careful entity resolution. *kgontologies* defines a method for assisting with entity mastery through adoption of *fully qualified names* within a namespace-framework.
+
+### Core Ontologies
+
+To provide consistency, a number of ontologies are published as part of this package which seek to underline and support some of the wider functionality. These include:
+
+* NamedObjects Ontology - [kgnaming.owl](ontologies/kgnaming.owl)
+* DMCAR Modelling Ontology - [kgdmcar.owl](ontologies/kgdmcar.owl)
 
 ### Visualisation Tools
 
