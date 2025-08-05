@@ -61,8 +61,23 @@ def augment_query_results(source_graph,
             entity_data=entity_data.union(set(object_filter))
     return entity_data
 
-def filter_triples_from_graph_on_predicate(graph, node_filter_set, predicate_filter_set):
+def return_nodes_of_type(graph, type_set):
+    node_set = set()
+    for s,p,o in graph.triples((None, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), None)):
+        if o in type_set:
+            node_set.add(s)
+    return node_set
+
+
+def filter_triples_from_graph(graph, node_filter_set, predicate_filter_set, type_filter_set):
     new_g = Graph()
+
+    # select nodes from type_filter set
+    typed_exclusion_nodes = return_nodes_of_type(graph, type_filter_set)
+
+    #print(typed_exclusion_nodes)
+
+    node_filter_set = node_filter_set.union(typed_exclusion_nodes)
     
     for s,p,o in graph.triples((None, None, None)):
         if p not in predicate_filter_set and s not in node_filter_set and o not in node_filter_set:
@@ -85,6 +100,62 @@ def get_type_triples(graph, subject, sparql_option=True):
         for s, p, o in graph.triples((subject, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), None)):
             type_triples.append((s, p, o))
     return type_triples
+
+def get_used_predicate_set(rdfgraph, sparql_method=True):
+    #Compile a list of all the predicates *used* in the graph
+    pset = set()
+    if sparql_method:
+        results = rdfgraph.query("""SELECT DISTINCT ?p { ?s ?p ?o}""")
+        pset=set(results)
+    else:
+        for s,p,o in rdfgraph.triples((None, None, None)):
+            pset.add(p)
+    return pset
+
+def get_used_types_set(rdfgraph, sparql_method=True):
+    #Compile a list of all the types assigned to entities in the graph
+    tset = set()
+    if sparql_method:
+        results = rdfgraph.query("""SELECT DISTINCT ?type WHERE {
+                        ?subject ?isa ?type .
+                        VALUES ?isa {rdf:type} .
+                    }""")
+        tset=set([r[0] for r in results])
+    else:
+        for s, p, o in rdfgraph.triples((None, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), None)):
+            tset.add(o)
+
+    return tset
+
+def get_used_entities_set(rdfgraph, sparql_method=True):
+    #Compile a list of all the entities present in the graph
+    eset = set()
+    if sparql_method:
+        results = rdfgraph.query("""SELECT DISTINCT ?entity 
+                    
+                    {
+                        {SELECT DISTINCT ?entity WHERE {
+                            ?entity ?p ?o .
+                            FILTER( ISIRI(?entity) ).
+                        }
+                    }     
+                    UNION
+                        {SELECT DISTINCT ?entity WHERE {
+                        ?s ?p ?entity .
+                        FILTER( ISIRI(?entity) ).
+                    }
+                    }
+                    }
+
+                                 """)
+        eset=set([r[0] for r in results])
+    else:
+        for s, p, o in rdfgraph.triples((None, None, None)):
+            if isinstance(s, URIRef):
+                eset.add(s)
+            if isinstance(o, URIRef):
+                eset.add(o)
+    return eset
 
 def get_label_triples(graph, subject, sparql_option=True):
     """Given an RDF graph and a subject, return all literal triples for that subject."""
