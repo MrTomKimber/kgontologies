@@ -191,13 +191,11 @@ class gui_node_styletab_control(object):
                     self.colour_value=v
 
 
-class gui_rdf_graph_visualisation_controls(object):
-    def __init__(self, graph, default_scheme='dutch9', default_size=20, default_label_size=10):
+class gui_rdfgraph_node_styler_controls(object):
+
+    def __init__(self, graph, default_scheme='dutch9', default_size=20, default_label_size=10, debug=False):
         self.schemes_d = colourschemes.colour_schemes
         self.graph = graph
-        pred_dict = dict(sorted(graph_filters.gen_predicate_filter_template(graph, sparql_method=True).items(), key=lambda x : x[0]))
-        ent_dict = dict(sorted(graph_filters.gen_entities_filter_template(graph, sparql_method=True).items(), key=lambda x : x[0]))
-        
         self._ui_theme_picker = gui_scheme_picker_multi_control(self.schemes_d)
         self.theme = self._ui_theme_picker.value
         self.type_dict = dict(sorted(graph_filters.gen_types_filter_template(graph, sparql_method=True).items(), key=lambda x : x[0]))
@@ -217,10 +215,9 @@ class gui_rdf_graph_visualisation_controls(object):
         self._ui_type_style_tab = widgets.Tab(  titles=[c.name for c in self.style_tab_collection], 
                                                 children=[c.control for c in self.style_tab_collection])
         self._ui_theme_picker.dropdown.observe(self.on_theme_change, names="value")
-        debug=False
+        
         self.debug = widgets.Output()
         if debug:
-            
             self.control = widgets.VBox(children=[self._ui_theme_picker.control, self._ui_type_style_tab, self.debug])
         else:
             self.control = widgets.VBox(children=[self._ui_theme_picker.control, self._ui_type_style_tab])
@@ -265,7 +262,4 @@ class gui_rdf_graph_visualisation_controls(object):
             if style_tab.id in type_style_mappings:
                 update_dict = {k:v for k,v in type_style_mappings[style_tab.id].items() if k in {"colour", "size", "shape"}}
                 style_tab.update(**update_dict)
-
-        
-
 

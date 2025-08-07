@@ -39,6 +39,148 @@ def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
 
 
 
+def process_anonymous_data_graph(data_graph, configuration, data_namespace="http://data#", entity_namespace="http://entity#"):
+    DATA = Namespace(data_namespace)
+    result_graph = Graph(bind_namespaces="rdflib")
+    entity_catalog=dict()
+    fqn_catalog=dict()
+    hdict = build_naming_lineage_hierarchy(configuration)
+
+    entity_set = set()
+    for obj in configuration['NamedObjects']:
+        targetclass_uri = URIRef(obj['TargetClass'])
+        for config_instance in obj['Instances']:
+            iname = config_instance['InstanceName']
+            subjecttag = config_instance['SubjectTag']
+            url_config_subject = urllib.parse.quote(config_instance['SubjectTag'])
+            subjecttag_spec = DATA[f"column({url_config_subject})"]
+            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
+            uqn_tag_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
+            entity_catalog[targetclass_uri]=dict()
+            
+            #print( "T", targetclass_uri, uqn_tag_spec, subjecttag_spec)
+            # Cycle over available data rows
+            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
+                # For each datarow, extract instances of targetclass
+                #print("Row:" , datarow)
+                fetched_label = get_value_from_datarow(datarow, data_graph, subjecttag)
+                fqn=get_keylist_from_datarow(datarow, data_graph, uqn_tag_spec)
+#                for fetch_key in uqn_tag_spec:
+#                    key_values = [r[2] for r in data_graph.triples((datarow, fetch_key, None))]
+#                    assert len(key_values)<2
+#                    if key_values != []:
+#                        fqn.append(key_values[0])
+                fqn = ".".join([n for n in fqn if n is not None])
+                    
+                for instance in [r[2] for r in data_graph.triples((datarow, subjecttag_spec, None))]:
+                    newobj = DataNamedObject(targetclass_uri.toPython(), fqn, fetched_label, entity_namespace)
+
+                    if newobj.fully_qualified_name not in fqn_catalog:
+                        fqn_catalog[newobj.fully_qualified_name]=newobj
+                        entity_catalog[targetclass_uri][newobj.hash]=newobj
+                        entity_set.add(newobj)
+
+    #print("##############################")       
+    #for k, v in fqn_catalog.items():
+    #    print(f"{k} : {v.fully_qualified_name}, {v.label}")
+    #print("##############################")       
+    relationship_set=set()
+    
+    for rel in configuration['Relationships']:
+        predicate_uri = rel['Predicate']
+        for relationship_config_instance in rel['Instances']:
+            iname = relationship_config_instance['InstanceName']
+            subjecttag = relationship_config_instance['SubjectTag']
+            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
+            subj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
+
+            objecttag = relationship_config_instance['ObjectTag']
+            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, objecttag)[::-1] if t!="<root>"]
+            obj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
+            
+            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
+                # Test to see if both subject and object values are present (each should be the -1 value in the associated spec)
+                raw_subject_fqn=get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec)
+                raw_object_fqn=get_keylist_from_datarow(datarow, data_graph, obj_uqn_spec)
+                subject_value = get_value_from_datarow(datarow, data_graph, subj_uqn_spec[-1])
+                object_value = get_value_from_datarow(datarow, data_graph, obj_uqn_spec[-1])
+                                
+                if len(raw_subject_fqn)==len(subj_uqn_spec) and len(raw_object_fqn)==len(obj_uqn_spec):
+                    subject_fqn=".".join([n for n in raw_subject_fqn if n is not None])
+                    object_fqn=".".join([n for n in raw_object_fqn if n is not None])
+                    if (subject_value is not None and object_value is not None) and (subject_fqn.strip() != "" and object_fqn.strip() != ""):
+                        if subject_fqn in fqn_catalog:
+                            subject_entity = fqn_catalog[subject_fqn].uri
+                        else:
+                            print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
+                            assert False
+                        if object_fqn in fqn_catalog:
+                            object_entity = fqn_catalog[object_fqn].uri
+                        else:
+                            print(f"{object_fqn} not in fqn_catalog")
+                            assert False
+                        if subject_entity != object_entity:
+                            relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
+                        else:
+                            print("**********************************")
+                            print("Recursive Relationship")
+                            print(predicate_uri)
+                            print( f"s{subject_value}, o{object_value}")
+                            print(raw_subject_fqn, subj_uqn_spec)
+                            print(raw_object_fqn, obj_uqn_spec)
+                            print("**********************************")
+
+                elif len(raw_subject_fqn)>0 or len(raw_object_fqn)>0:
+                    print("**********************************")
+                    print("Size Mismatch")
+                    print(predicate_uri)
+                    print(raw_subject_fqn, subj_uqn_spec)
+                    print(raw_object_fqn, obj_uqn_spec)
+                    print("**********************************")
+                    
+
+    literals_set=set()
+    
+    for prop in configuration['Properties']:
+        predicate_uri = prop['Predicate']
+        for property_config_instance in prop['Instances']:
+            iname = property_config_instance['InstanceName']
+            subjecttag = property_config_instance['SubjectTag']
+            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
+            subj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
+
+            literaltag = property_config_instance['LiteralTag']
+            literaltag_spec = DATA[f"column({urllib.parse.quote(literaltag)})"]
+            
+            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
+                subject_fqn=".".join([n for n in get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec) if n is not None])
+                if subject_fqn.strip() != "":
+                    if subject_fqn in fqn_catalog:
+                        subject_entity = fqn_catalog[subject_fqn].uri
+                    else:
+                        print(predicate_uri)
+                        print(url_traverse_spec)
+                        print(subject_fqn, list(fqn_catalog.keys()))
+                        assert False
+                    literal_values = [r[2] for r in data_graph.triples((datarow, literaltag_spec, None))]
+
+                    for literal in literal_values:
+                        literals_set.add(DataLiteral(subject_entity, predicate_uri, literal))
+    # Aggregate the triples into a single list
+    triple_collection = [t for e in entity_set for t in e.to_triples() ]
+    triple_collection.extend([t for r in relationship_set for t in r.to_triples()])
+    triple_collection.extend([t for l in literals_set for t in l.to_triples()])
+
+    return_graph = Graph(bind_namespaces="rdflib")
+    for t in triple_collection:
+        return_graph.add(t)
+
+    return return_graph
+
+def bind_namespaces(graph, namespace_dict):
+    for k,v in namespace_dict.items():
+        graph.bind(k,v)
+
 def capture_entity_data(rdflib_graph, entity, ontology_context_graph=None):
     """For a provided rdflib graph and an identified entity, extract
     all types, labels, literals and participating properties"""
@@ -121,8 +263,8 @@ def build_naming_lineage_hierarchy(configuration):
             if parenttag is None or str(parenttag).strip()=="":
                 parenttag="<root>"
             name_links[iname]=parenttag
-    for k,v in name_links.items():
-        print(f"{k} : {v}")
+    #for k,v in name_links.items():
+    #    print(f"{k} : {v}")
     return name_links
 
 def traverse_hierarchy_path(hdict, start, acc=None):
@@ -229,134 +371,4 @@ def get_value_from_datarow(rowurl, data_graph, key):
     if key_values != []:
         fetched_value = key_values[0]
     return fetched_value
-
-def process_anonymous_data_graph(data_graph, configuration, data_namespace="http://data#", entity_namespace="http://entity#"):
-    DATA = Namespace(data_namespace)
-    result_graph = Graph(bind_namespaces="rdflib")
-    entity_catalog=dict()
-    fqn_catalog=dict()
-    hdict = build_naming_lineage_hierarchy(configuration)
-
-    entity_set = set()
-    for obj in configuration['NamedObjects']:
-        targetclass_uri = URIRef(obj['TargetClass'])
-        for config_instance in obj['Instances']:
-            iname = config_instance['InstanceName']
-            subjecttag = config_instance['SubjectTag']
-            url_config_subject = urllib.parse.quote(config_instance['SubjectTag'])
-            subjecttag_spec = DATA[f"column({url_config_subject})"]
-            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
-            uqn_tag_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
-            entity_catalog[targetclass_uri]=dict()
-            
-            #print( "T", targetclass_uri, uqn_tag_spec, subjecttag_spec)
-            # Cycle over available data rows
-            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
-                # For each datarow, extract instances of targetclass
-                #print("Row:" , datarow)
-                fetched_label = get_value_from_datarow(datarow, data_graph, subjecttag)
-                fqn=get_keylist_from_datarow(datarow, data_graph, uqn_tag_spec)
-#                for fetch_key in uqn_tag_spec:
-#                    key_values = [r[2] for r in data_graph.triples((datarow, fetch_key, None))]
-#                    assert len(key_values)<2
-#                    if key_values != []:
-#                        fqn.append(key_values[0])
-                fqn = ".".join([n for n in fqn if n is not None])
-                    
-                for instance in [r[2] for r in data_graph.triples((datarow, subjecttag_spec, None))]:
-                    newobj = DataNamedObject(targetclass_uri.toPython(), fqn, fetched_label, entity_namespace)
-
-                    if newobj.fully_qualified_name not in fqn_catalog:
-                        fqn_catalog[newobj.fully_qualified_name]=newobj
-                        entity_catalog[targetclass_uri][newobj.hash]=newobj
-                        entity_set.add(newobj)
-
-    print("##############################")       
-    for k, v in fqn_catalog.items():
-        print(f"{k} : {v.fully_qualified_name}, {v.label}")
-    print("##############################")       
-    relationship_set=set()
-    
-    for rel in configuration['Relationships']:
-        predicate_uri = rel['Predicate']
-        for relationship_config_instance in rel['Instances']:
-            iname = relationship_config_instance['InstanceName']
-            subjecttag = relationship_config_instance['SubjectTag']
-            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
-            subj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
-
-            objecttag = relationship_config_instance['ObjectTag']
-            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, objecttag)[::-1] if t!="<root>"]
-            obj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
-            
-            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
-                # Test to see if both subject and object values are present (each should be the -1 value in the associated spec)
-                raw_subject_fqn=get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec)
-                raw_object_fqn=get_keylist_from_datarow(datarow, data_graph, obj_uqn_spec)
-                subject_value = get_value_from_datarow(datarow, data_graph, subj_uqn_spec[-1])
-                object_value = get_value_from_datarow(datarow, data_graph, obj_uqn_spec[-1])
-                                
-                if len(raw_subject_fqn)==len(subj_uqn_spec) and len(raw_object_fqn)==len(obj_uqn_spec):
-                    subject_fqn=".".join([n for n in raw_subject_fqn if n is not None])
-                    object_fqn=".".join([n for n in raw_object_fqn if n is not None])
-                    if (subject_value is not None and object_value is not None) and (subject_fqn.strip() != "" and object_fqn.strip() != ""):
-                        if subject_fqn in fqn_catalog:
-                            subject_entity = fqn_catalog[subject_fqn].uri
-                        else:
-                            print(datarow, subject_fqn, object_fqn, iname, predicate_uri)
-                            assert False
-                        if object_fqn in fqn_catalog:
-                            object_entity = fqn_catalog[object_fqn].uri
-                        else:
-                            print(f"{object_fqn} not in fqn_catalog")
-                            assert False
-                        if subject_entity != object_entity:
-                            relationship_set.add(DataRelationship(subject_entity, predicate_uri, object_entity))
-                        else:
-                            print("**********************************")
-                            print("Recursive Relationship")
-                            print(predicate_uri)
-                            print( f"s{subject_value}, o{object_value}")
-                            print(raw_subject_fqn, subj_uqn_spec)
-                            print(raw_object_fqn, obj_uqn_spec)
-                            print("**********************************")
-
-                elif len(raw_subject_fqn)>0 or len(raw_object_fqn)>0:
-                    print("**********************************")
-                    print("Size Mismatch")
-                    print(predicate_uri)
-                    print(raw_subject_fqn, subj_uqn_spec)
-                    print(raw_object_fqn, obj_uqn_spec)
-                    print("**********************************")
-                    
-
-    literals_set=set()
-    
-    for prop in configuration['Properties']:
-        predicate_uri = prop['Predicate']
-        for property_config_instance in prop['Instances']:
-            iname = property_config_instance['InstanceName']
-            subjecttag = property_config_instance['SubjectTag']
-            url_traverse_spec = [urllib.parse.quote(t) for t in traverse_hierarchy_path(hdict, subjecttag)[::-1] if t!="<root>"]
-            subj_uqn_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
-
-            literaltag = property_config_instance['LiteralTag']
-            literaltag_spec = DATA[f"column({urllib.parse.quote(literaltag)})"]
-            
-            for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
-                subject_fqn=".".join([n for n in get_keylist_from_datarow(datarow, data_graph, subj_uqn_spec) if n is not None])
-                if subject_fqn.strip() != "":
-                    if subject_fqn in fqn_catalog:
-                        subject_entity = fqn_catalog[subject_fqn].uri
-                    else:
-                        print(predicate_uri)
-                        print(url_traverse_spec)
-                        print(subject_fqn, list(fqn_catalog.keys()))
-                        assert False
-                    literal_values = [r[2] for r in data_graph.triples((datarow, literaltag_spec, None))]
-
-                    for literal in literal_values:
-                        literals_set.add(DataLiteral(subject_entity, predicate_uri, literal))
-                
-    return entity_set, relationship_set, literals_set
 
