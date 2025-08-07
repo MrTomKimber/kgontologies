@@ -158,6 +158,11 @@ class gui_node_styletab_control(object):
 
         self.control = self._ui_h_box
         self.colour_unchanged = True
+        self.shape_value=self._ui_shape_selector_dropdown.value
+        self.size_value=self._ui_node_size_selector.value
+        self.colour_value=self._ui_node_colour_selector.value
+        self.selected_value=True  # Default not yet implemented
+        self.label_size_value=20  # Default not yet implemented
 
     def on_update(self, change):
         
@@ -200,7 +205,7 @@ class gui_rdfgraph_node_styler_controls(object):
         self.theme = self._ui_theme_picker.value
         self.type_dict = dict(sorted(graph_filters.gen_types_filter_template(graph, sparql_method=True).items(), key=lambda x : x[0]))
         self.shape_scheme = ["Circle", "Rectangle", "Hexagon"]
-        initial_type_style_mapping=self.create_type_style_mapping(graph=self.graph, 
+        initial_type_style_mapping=self.create_type_style_mapping(
                                                                   type_dict=self.type_dict, 
                                                                   colour_scheme=self.theme, 
                                                                   default_size=default_size, 
@@ -222,7 +227,8 @@ class gui_rdfgraph_node_styler_controls(object):
         else:
             self.control = widgets.VBox(children=[self._ui_theme_picker.control, self._ui_type_style_tab])
 
-    def create_type_style_mapping(self, graph, type_dict, colour_scheme, default_size, default_label_size, shape_scheme):
+
+    def create_type_style_mapping(self, type_dict, colour_scheme, default_size, default_label_size, shape_scheme):
 
         colour_cycle = colourschemes.gen_cycle(colour_scheme)
         shape_cycle = cycle(shape_scheme)
@@ -238,19 +244,34 @@ class gui_rdfgraph_node_styler_controls(object):
                 p=0
             
             type_style_mapping[k] = {        "id" : k, 
-                                             "name" : k.n3(graph.namespace_manager), 
+                                             "name" : k.n3(self.graph.namespace_manager), 
                                              "shape" : s, 
                                              "size" : default_size, 
                                              "colour" : c, 
                                              "selected" : v, 
                                              "label_size" : default_label_size}
         return type_style_mapping
+    
+    def get_typed_mappings(self):
+        # See: https://robert-haas.github.io/gravis-docs/rst/format_specification.html#gjgf-format
+        mappings_d = dict()
+        for style in self.style_tab_collection:
+            mappings_d[style.id]={"id" : style.id, 
+                                  "name" : style.name, 
+                                  "shape" : style.shape_value, 
+                                  "size" : style.size_value, 
+                                  "colour" : style.colour_value, 
+                                  "selected" : style.selected_value, 
+                                  "label_size" : style.label_size_value}
+        return mappings_d
+
+
 
     def on_theme_change(self, change):
         with self.debug:
             print(change)
         self.theme=change['new']
-        type_style_mappings=self.create_type_style_mapping(graph=self.graph, 
+        type_style_mappings=self.create_type_style_mapping(
                                                           type_dict=self.type_dict, 
                                                           colour_scheme=self.theme,
                                                           default_size=30, 
@@ -262,4 +283,51 @@ class gui_rdfgraph_node_styler_controls(object):
             if style_tab.id in type_style_mappings:
                 update_dict = {k:v for k,v in type_style_mappings[style_tab.id].items() if k in {"colour", "size", "shape"}}
                 style_tab.update(**update_dict)
+
+class gui_rdfgraph_nodetype_filter_control(object):
+    def __init__(self, graph):
+        self.graph = graph
+        self.type_dict = {k.n3(self.graph.namespace_manager):k for k,v in sorted(graph_filters.gen_types_filter_template(graph, sparql_method=True).items(), key = lambda x : x[0])}
+
+        
+        self._ui_type_selector = widgets.SelectMultiple(
+                            options=list(self.type_dict.keys()),
+                            value=list(self.type_dict.keys()),
+                            description='Types',
+                            disabled=False, 
+                            rows=len(list(self.type_dict.keys())),
+                            layout=widgets.Layout(width="70%")
+                            )
+        
+        self.control = self._ui_type_selector
+        
+    def get_selected_uris(self):
+        rlist = []
+        for u in self.control.value:
+            rlist.append(self.type_dict.get(u))
+        return rlist
+
+
+class gui_rdfgraph_predicate_filter_control(object):
+    def __init__(self, graph):
+        self.graph = graph
+        self.pred_dict = {k.n3(self.graph.namespace_manager):k for k,v in sorted(graph_filters.gen_predicate_filter_template(graph, sparql_method=True).items(), key = lambda x : x[0])}
+
+        
+        self._ui_pred_selector = widgets.SelectMultiple(
+                            options=list(self.pred_dict.keys()),
+                            value=list(self.pred_dict.keys()),
+                            description='Predicates',
+                            disabled=False, 
+                            rows=len(list(self.pred_dict.keys())),
+                            layout=widgets.Layout(width="70%")
+                            )
+        
+        self.control = self._ui_pred_selector
+
+    def get_selected_uris(self):
+        rlist = []
+        for u in self.control.value:
+            rlist.append(self.pred_dict.get(u))
+        return rlist
 
