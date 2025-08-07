@@ -4,6 +4,12 @@
 import ipywidgets as widgets
 import src.colourschemes as colourschemes
 import src.graph_filters as graph_filters
+import src.queryaugment as queryaugment
+import src.graphvisutils_gravis as graphvisutils_gravis
+from src.graphloader import bind_namespaces
+import gravis as gv
+from IPython.display import display, Image, HTML
+from functools import partial
 from itertools import cycle
 from math import pi, sin, cos
 
@@ -248,6 +254,7 @@ class gui_rdfgraph_node_styler_controls(object):
                                              "shape" : s, 
                                              "size" : default_size, 
                                              "colour" : c, 
+                                             "color" : c, 
                                              "selected" : v, 
                                              "label_size" : default_label_size}
         return type_style_mapping
@@ -258,9 +265,9 @@ class gui_rdfgraph_node_styler_controls(object):
         for style in self.style_tab_collection:
             mappings_d[style.id]={"id" : style.id, 
                                   "name" : style.name, 
-                                  "shape" : style.shape_value, 
+                                  "shape" : str(style.shape_value).lower(), 
                                   "size" : style.size_value, 
-                                  "colour" : style.colour_value, 
+                                  "color" : style.colour_value, 
                                   "selected" : style.selected_value, 
                                   "label_size" : style.label_size_value}
         return mappings_d
@@ -306,7 +313,12 @@ class gui_rdfgraph_nodetype_filter_control(object):
         for u in self.control.value:
             rlist.append(self.type_dict.get(u))
         return rlist
-
+    
+    def get_all_possible_uris(self):
+        rlist = []
+        for u in self.control.options:
+            rlist.append(self.type_dict.get(u))
+        return rlist
 
 class gui_rdfgraph_predicate_filter_control(object):
     def __init__(self, graph):
@@ -330,13 +342,135 @@ class gui_rdfgraph_predicate_filter_control(object):
         for u in self.control.value:
             rlist.append(self.pred_dict.get(u))
         return rlist
+    
+    def get_all_possible_uris(self):
+        rlist = []
+        for u in self.control.options:
+            rlist.append(self.pred_dict.get(u))
+        return rlist
+        
 
 class gui_visualisation_control(object):
-    def __init__(self, graph):
+    def __init__(self, graph, debug=False):
         self.graph = graph
 
-        self.type_filter = gui_rdfgraph_nodetype_filter_control(graph)
-        self.pred_filter = gui_rdfgraph_predicate_filter_control(graph)
-        self.node_styler = gui_rdfgraph_node_styler_controls(graph)
-
+        # Load and bind associated ontologies for additional data enrichment
         
+
+        self.type_filter = gui_rdfgraph_nodetype_filter_control(graph)
+        self.node_styler = gui_rdfgraph_node_styler_controls(graph)
+        self.pred_filter = gui_rdfgraph_predicate_filter_control(graph)
+
+        self.vis_graph_settings = {
+            "node_label_data_source" : "label", 
+            "node_size_data_source" : "size", 
+            "node_label_size_factor" : 1.5, 
+            "node_size_factor" : 2.5, 
+            "edge_size_data_source" : "size", 
+            "edge_label_data_source" : "label", 
+            "edge_size_factor" : 2.5, 
+            "show_edge_label" : True,
+            "edge_curvature" : 0.2,
+            "graph_height" : 800,
+            "details_height" : 300, 
+            "layout_algorithm" : "forceAtlas2Based", 
+            #"layout_algorithm" : "hierarchicalRepulsion", 
+            #"gravitational_constant" : -0.15, 
+            "central_gravity" : 2.0, 
+            "spring_constant" : 0.14,
+            "avoid_overlap" : 0.5
+            
+        }
+
+        self.d3_graph_settings = {
+            "node_label_data_source" : "label", 
+            "node_size_data_source" : "size", 
+            "edge_size_data_source" : "size", 
+            "edge_label_data_source" : "label", 
+            "show_edge_label" : True,
+            "edge_curvature" : 0.2,
+            "use_collision_force" : True, 
+            "collision_force_radius" : 60, 
+            "collision_force_strength" : 0.8,
+            "graph_height" : 800,
+            "details_height" : 300, 
+            
+        }
+
+        self._ui_output_canvas = widgets.Output()
+        
+        self.generate_vis_button = widgets.Button(
+            description="Generate Visualisation", 
+            disabled=False, 
+            button_style='',
+            layout=widgets.Layout(width="20%"),
+            tooltip="Generate Visualisation"
+        )
+        self.generate_vis_button.on_click(self.generate_visualisation)
+
+        accordion = widgets.Accordion(children=[self.type_filter.control, 
+                                        self.node_styler.control,
+                                       self.pred_filter.control], 
+                                      titles=["Type Filter", 
+                                      "Style Nodes", 
+                                      "Predicate Filter"])
+        
+        
+        user_layout = widgets.VBox([accordion, self.generate_vis_button, self._ui_output_canvas], 
+                                   layout=widgets.Layout(width="100%"))
+        
+        self.control = user_layout
+        self.generate_visualisation(self.generate_vis_button)
+        
+
+    def generate_visualisation(self, b):
+
+        # Get updated filter details
+        exclude_types = set(self.type_filter.get_all_possible_uris())-set(self.type_filter.get_selected_uris())
+        exclude_preds = set(self.pred_filter.get_all_possible_uris()) - set(self.pred_filter.get_selected_uris())
+        exclude_nodes = set() ## Not implemented
+
+        print(exclude_types)
+        print(exclude_preds)
+        # Apply new filters to regenerate display graph
+        new_g = queryaugment.filter_triples_from_graph(self.graph, exclude_nodes, exclude_preds, exclude_types)
+        # Rebind any namespaces to graph
+        namespace_dict = {k:v for k,v in self.graph.namespace_manager.namespaces()}
+        bind_namespaces(new_g, namespace_dict)
+        # Apply styling choices to graph
+
+        nx_g = graphvisutils_gravis.rdflib_graph_to_networkx_for_gravis(new_g, 
+                                                                ontology_context_graph=None, 
+                                                                hide_types=True, 
+                                                                hide_literals=True)
+        type_mapping_d = self.node_styler.get_typed_mappings()
+        print(type_mapping_d)
+        ndf = partial(node_decorator_function, type_mapping=type_mapping_d)
+        nx_g = graphvisutils_gravis.decorate_networkx_nodes_with_function(nx_g, ndf)
+
+        # Generate Figure
+        fig = gv.vis(nx_g, **self.vis_graph_settings)
+        # Apply figure to output canvas
+        self._ui_output_canvas.clear_output()
+        with self._ui_output_canvas:
+            display(HTML(fig.to_html_partial()))
+
+        return new_g, nx_g, fig
+
+def node_decorator_function(node, data, type_mapping):
+    """A function for updating node decoration details based on type and/or other information.
+    Common node attributes to target for updation are:
+        color
+        size
+        shape
+        """
+    return_d = dict()
+
+    for k,v in type_mapping.items():
+        if data.get("rdfclass") in type_mapping.keys():
+            for mk,mv in type_mapping[data["rdfclass"]].items():
+                if mk in {"shape", "size", "color"}:
+                    return_d[mk]=mv
+
+            
+    return return_d

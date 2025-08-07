@@ -6,6 +6,22 @@ import numpy as np
 from hashlib import md5
 import urllib.parse
 
+def ontology_graph():
+    kgdmcar_g = Graph()
+    kgdmcar_g.parse ('../ontologies/kgdmcar.owl', format='xml')
+
+    kgnaming_g = Graph()
+    kgnaming_g.parse ('../ontologies/kgnaming.owl', format='xml')
+
+    ontology_graph = Graph(bind_namespaces="rdflib")
+
+    for t in kgnaming_g.triples((None, None, None)):
+        ontology_graph.add(t)
+
+    for t in kgdmcar_g.triples((None, None, None)):
+        ontology_graph.add(t)
+    return ontology_graph
+
 def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
 
     DATA = Namespace(data_namespace)
@@ -189,6 +205,8 @@ def capture_entity_data(rdflib_graph, entity, ontology_context_graph=None):
     entity_literals=dict()
     outbound_entity_properties=dict()
     inbound_entity_properties=dict()
+    if ontology_context_graph is None:
+        ontology_context_graph=ontology_graph()
 
     if ontology_context_graph is not None:
         # While this function captures the bare minimum of information about an entity,
@@ -207,7 +225,7 @@ def capture_entity_data(rdflib_graph, entity, ontology_context_graph=None):
         """)]
     else: 
         label_types = [URIRef("http://www.w3.org/2000/01/rdf-schema#label")]
-        type_types = [URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")]
+        type_types = [URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), URIRef("http://www.w3.org/2002/07/owl#Class")]
 
 
     
