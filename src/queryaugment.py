@@ -106,7 +106,7 @@ def get_used_predicate_set(rdfgraph, sparql_method=True):
     pset = set()
     if sparql_method:
         results = rdfgraph.query("""SELECT DISTINCT ?p { ?s ?p ?o}""")
-        pset=set(results)
+        pset=set([r[0] for r in results])
     else:
         for s,p,o in rdfgraph.triples((None, None, None)):
             pset.add(p)

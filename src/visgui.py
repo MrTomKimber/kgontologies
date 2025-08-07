@@ -331,3 +331,12 @@ class gui_rdfgraph_predicate_filter_control(object):
             rlist.append(self.pred_dict.get(u))
         return rlist
 
+class gui_visualisation_control(object):
+    def __init__(self, graph):
+        self.graph = graph
+
+        self.type_filter = gui_rdfgraph_nodetype_filter_control(graph)
+        self.pred_filter = gui_rdfgraph_predicate_filter_control(graph)
+        self.node_styler = gui_rdfgraph_node_styler_controls(graph)
+
+        
