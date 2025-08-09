@@ -264,18 +264,17 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
                     
                     if not isinstance(o.value, str):
                         if isinstance(o.value, pd.Timestamp):
-
-                            nx_g.add_edge(s,f"{o.value.isoformat()}",label="/".join(labels))
+                            nx_g.add_edge(s,f"{o.value.isoformat()}",label="/".join(labels),rdfclass=p)
                         else:
                             print( o.value, type(o.value))
-                            nx_g.add_edge(s,str(o.value),label="/".join(labels))
+                            nx_g.add_edge(s,str(o.value),label="/".join(labels),rdfclass=p)
                     else:
-                        nx_g.add_edge(s,o.value,label="/".join(labels))
+                        nx_g.add_edge(s,o.value,label="/".join(labels),rdfclass=p)
                 else:
                     if s==o:
                         print(f"Warning: self-loop detected for {s} with predicate {p}")
                         print((s,pp,o))
-                    nx_g.add_edge(s,o,label="/".join(labels))
+                    nx_g.add_edge(s,o,label="/".join(labels),rdfclass=p)
                     
     return nx_g
 
@@ -290,3 +289,12 @@ def decorate_networkx_nodes_with_function(nx_g, node_dec_f):
     return nx_g
 
 
+def decorate_networkx_edges_with_function(nx_g, edge_dec_f):
+    """Given a function whose parameters accept an edge name, and a dictionary of attributes, 
+    and whose return type is a dict, cycle over the available nodes in the graph
+    and apply the updated values returned from the function onto the various nodes."""
+    for s,f,d in nx_g.edges(data=True):
+        dec_dict = edge_dec_f((s,f),d)
+        for k,v in dec_dict.items():
+            nx_g[s][f][0][k]=v
+    return nx_g

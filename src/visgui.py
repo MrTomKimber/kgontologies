@@ -157,12 +157,16 @@ class gui_node_styletab_control(object):
                                                self._ui_node_colour_selector])
         
         self._ui_h_box = widgets.HBox(children=[self._ui_node_icon_preview_html, self._ui_v_box])
-
+        self._ui_title = widgets.HTML(
+            value=f"<h1>{self.name}</h1>", 
+            placeholder = f"{self.name}"
+        )
+        self._ui_v_container = widgets.VBox(children=[self._ui_title, self._ui_h_box])
         self._ui_shape_selector_dropdown.observe(self.on_update, names='value')
         self._ui_node_size_selector.observe(self.on_update, names='value')
         self._ui_node_colour_selector.observe(self.on_update, names='value')
 
-        self.control = self._ui_h_box
+        self.control = self._ui_v_container
         self.colour_unchanged = True
         self.shape_value=self._ui_shape_selector_dropdown.value
         self.size_value=self._ui_node_size_selector.value
@@ -360,12 +364,13 @@ class gui_visualisation_control(object):
         self.type_filter = gui_rdfgraph_nodetype_filter_control(graph)
         self.node_styler = gui_rdfgraph_node_styler_controls(graph)
         self.pred_filter = gui_rdfgraph_predicate_filter_control(graph)
+        self.pred_styler = gui_rdfgraph_predicate_styler_controls(graph)
 
         self.vis_graph_settings = {
             "node_label_data_source" : "label", 
             "node_size_data_source" : "size", 
             "node_label_size_factor" : 1.5, 
-            "node_size_factor" : 2.5, 
+            "node_size_factor" : 1.0, 
             "edge_size_data_source" : "size", 
             "edge_label_data_source" : "label", 
             "edge_size_factor" : 2.5, 
@@ -410,10 +415,12 @@ class gui_visualisation_control(object):
 
         accordion = widgets.Accordion(children=[self.type_filter.control, 
                                         self.node_styler.control,
-                                       self.pred_filter.control], 
+                                       self.pred_filter.control, 
+                                       self.pred_styler.control],
                                       titles=["Type Filter", 
                                       "Style Nodes", 
-                                      "Predicate Filter"])
+                                      "Predicate Filter",
+                                      "Style Predicates"])
         
         
         user_layout = widgets.VBox([accordion, self.generate_vis_button, self._ui_output_canvas], 
@@ -444,9 +451,12 @@ class gui_visualisation_control(object):
                                                                 hide_types=True, 
                                                                 hide_literals=True)
         type_mapping_d = self.node_styler.get_typed_mappings()
-        print(type_mapping_d)
+        pred_mapping_d = self.pred_styler.get_typed_mappings()
+
         ndf = partial(node_decorator_function, type_mapping=type_mapping_d)
+        pdf = partial(edge_decorator_function, pred_mapping=pred_mapping_d)
         nx_g = graphvisutils_gravis.decorate_networkx_nodes_with_function(nx_g, ndf)
+        nx_g = graphvisutils_gravis.decorate_networkx_edges_with_function(nx_g, pdf)
 
         # Generate Figure
         fig = gv.vis(nx_g, **self.vis_graph_settings)
@@ -469,8 +479,213 @@ def node_decorator_function(node, data, type_mapping):
     for k,v in type_mapping.items():
         if data.get("rdfclass") in type_mapping.keys():
             for mk,mv in type_mapping[data["rdfclass"]].items():
-                if mk in {"shape", "size", "color"}:
+                if mk in {"shape", "size", "color", "opacity", "border_color", "border_size", 
+                          "label_color", "label_size"}:
                     return_d[mk]=mv
-
-            
     return return_d
+
+def edge_decorator_function(edge, data, pred_mapping):
+    """A function for updating node decoration details based on type and/or other information.
+    Common node attributes to target for updation are:
+        color
+        size
+        shape
+        """
+    return_d = dict()
+
+    for k,v in pred_mapping.items():
+        if data.get("rdfclass") in pred_mapping.keys():
+            for mk,mv in pred_mapping[data["rdfclass"]].items():
+                if mk in {"shape", "size", "color", "opacity", "border_color", "border_size", 
+                          "label_color", "label_size"}:
+                    return_d[mk]=mv
+    return return_d
+
+def predicate_icon(size, area, colour):
+    h_area = area/2
+    h_size = size/2
+    size = size / 10
+    patch = f"""<path d=\"M {-(2/3*size)} 0 
+                          l 8 0 
+                          l -1 -2 
+                          l 8 2 
+                          l -8 2 
+                          l 1 -2 
+                          Z\" 
+                          fill=\"{colour}\" 
+                          stroke=\"{colour}\" 
+                          stroke-width=\"{size}\" 
+                          stroke-linejoin=\"miter\" 
+                          stroke-miterlimit=\"10\"/>"""
+        
+    svg_content="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" viewBox=\"-2 -10 24 18\">{content}</svg>"
+
+    return svg_content.format(content=patch)
+
+
+class gui_predicate_styletab_control(object):
+    def __init__(self, **default_kwargs):
+        self.implemented_kwarg_list = ['theme','size','colour','name', 'id']
+
+        for k,v in default_kwargs.items():
+            if k in self.implemented_kwarg_list:
+                if k.lower()=="size":
+                    self.size_value=v
+                elif k.lower()=="colour":
+                    self.colour_value=v
+                elif k.lower()=="name":
+                    self.name=v
+                elif k.lower()=="id":
+                    self.id=v
+
+        self._ui_predicate_size_selector = widgets.IntSlider(
+            value = self.size_value, 
+            min=1, 
+            max=15,
+            step=1,
+            description="Size", 
+            disabled=False
+        )
+
+        self._ui_predicate_colour_selector = widgets.ColorPicker(
+            concise=False, 
+            description="Colour", 
+            value=self.colour_value, 
+            disabled=False
+        )
+
+        self._ui_predicate_icon_preview_html = widgets.HTML(
+            value = predicate_icon(
+                            size=self.size_value,
+                            area = 100,
+                            colour=self.colour_value),
+            layout = widgets.Layout(width="10%")
+        )
+
+
+
+        self._ui_v_box = widgets.VBox(children=[
+                                               self._ui_predicate_size_selector, 
+                                               self._ui_predicate_colour_selector])
+
+        #self.debug = widgets.Output()
+        
+        self._ui_h_box = widgets.HBox(children=[self._ui_predicate_icon_preview_html, self._ui_v_box])
+        self._ui_title = widgets.HTML(
+            value=f"<h1>{self.name}</h1>", 
+            placeholder = f"{self.name}"
+        )
+        self._ui_v_container = widgets.VBox(children=[self._ui_title, self._ui_h_box])
+        #with self.debug:
+        #    print("set update function")
+
+        self._ui_predicate_size_selector.observe(self.on_control_update, names='value')
+        self._ui_predicate_colour_selector.observe(self.on_control_update, names='value')
+        
+        self.control = self._ui_v_container
+        self.selected_value=True  # Default not yet implemented
+        self.label_size_value=20  # Default not yet implemented
+
+
+
+    def on_control_update(self, change):
+        #with self.debug:
+        #    print("on_update")
+        #    print(change)
+        self.size_value=self._ui_predicate_size_selector.value
+        self.colour_value=self._ui_predicate_colour_selector.value
+        self._ui_predicate_icon_preview_html.value=predicate_icon(
+                                size=self.size_value, 
+                                area = 100,
+                                colour=self.colour_value)
+        
+
+
+    def update(self, **kwargs):
+        print(kwargs)
+        for k,v in kwargs.items():
+            if k in self.implemented_kwarg_list:
+                if k.lower()=="size":
+                    self._ui_predicate_size_selector.value=v
+                    self.size_value=v
+                elif k.lower()=="colour":
+                    self._ui_predicate_colour_selector.value=v
+                    self.colour_value=v
+
+
+class gui_rdfgraph_predicate_styler_controls(object):
+
+    def __init__(self, graph, default_scheme='dutch9', default_size=2, default_label_size=10, debug=False):
+        self.schemes_d = colourschemes.colour_schemes
+        self.graph = graph
+        self._ui_theme_picker = gui_scheme_picker_multi_control(self.schemes_d)
+        self.theme = self._ui_theme_picker.value
+        #self.pred_dict = {k.n3(self.graph.namespace_manager):k for k,v in sorted(graph_filters.gen_predicate_filter_template(graph, sparql_method=True).items(), key = lambda x : x[0])}
+        self.pred_dict = dict(sorted(graph_filters.gen_predicate_filter_template(graph, sparql_method=True).items(), key = lambda x : x[0]))
+        
+        initial_type_style_mapping=self.create_predicate_style_mapping(
+                                                                  pred_dict=self.pred_dict, 
+                                                                  colour_scheme=self.theme, 
+                                                                  default_size=default_size, 
+                                                                  default_label_size=default_label_size)
+        
+        self.style_tab_collection=[]
+
+        for k,v in initial_type_style_mapping.items():
+            self.style_tab_collection.append(gui_predicate_styletab_control(**v))
+
+        self._ui_type_style_tab = widgets.Tab(  titles=[c.name for c in self.style_tab_collection], 
+                                                children=[c.control for c in self.style_tab_collection])
+        self._ui_theme_picker.dropdown.observe(self.on_theme_change, names="value")
+        
+        self.debug = widgets.Output()
+        if debug:
+            self.control = widgets.VBox(children=[self._ui_theme_picker.control, self._ui_type_style_tab, self.debug])
+        else:
+            self.control = widgets.VBox(children=[self._ui_theme_picker.control, self._ui_type_style_tab])
+
+
+    def create_predicate_style_mapping(self, pred_dict, colour_scheme, default_size, default_label_size):
+        print(pred_dict)
+        colour_cycle = colourschemes.gen_cycle(colour_scheme)
+        pred_style_mapping = dict()
+        
+        for k,v in pred_dict.items():
+            c = next(colour_cycle)
+            pred_style_mapping[k] = {        "id" : k, 
+                                             "name" : k.n3(self.graph.namespace_manager), 
+                                             "size" : default_size, 
+                                             "colour" : c, 
+                                             "color" : c, 
+                                             "label_size" : default_label_size}
+        
+        return pred_style_mapping
+    
+    def get_typed_mappings(self):
+        # See: https://robert-haas.github.io/gravis-docs/rst/format_specification.html#gjgf-format
+        mappings_d = dict()
+        for style in self.style_tab_collection:
+            mappings_d[style.id]={"id" : style.id, 
+                                  "name" : style.name, 
+                                  "size" : style.size_value, 
+                                  "color" : style.colour_value, 
+                                  "label_size" : style.label_size_value}
+        return mappings_d
+
+
+
+    def on_theme_change(self, change):
+        with self.debug:
+            print(change)
+        self.theme=change['new']
+        predicate_style_mappings=self.create_predicate_style_mapping(
+                                                          pred_dict=self.pred_dict, 
+                                                          colour_scheme=self.theme,
+                                                          default_size=2, 
+                                                          default_label_size=20
+                                                          )
+        for style_tab in self.style_tab_collection:
+
+            if style_tab.id in predicate_style_mappings:
+                update_dict = {k:v for k,v in predicate_style_mappings[style_tab.id].items() if k in {"colour", "size", "shape"}}
+                style_tab.update(**update_dict)
