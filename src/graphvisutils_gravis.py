@@ -17,18 +17,17 @@ def construct_hover_panel(entity_data, namespace_manager):
     if labelgets is None:
         labelgets=[entity_data['node'].n3(namespace_manager)]
     labels = [l for l in labelgets]
-    title = labels[0]
+    title=labels[0]
     if title[0]=="\"" and title[-1]=="\"":
         title=title[1:-1]
     typegets = entity_data.get('types',[])
+    
     if typegets is None:
         typegets=[Literal("No type recorded")]
-    types = [t.n3(namespace_manager) for t in typegets]
-    
-        
-    subtitle = list(types)[0]
+    types = ",".join([f"{str(t.n3(namespace_manager))}" for t in typegets])
+    title = f"{labels[0]} | {types}"
     description = "\n".join([list(v)[0] for k,v in entity_data['literals'].items() if "desc" in k.lower()])
-    return f"<h2>{title}</h2><h3>{subtitle}</h3><p>{description}</p>"
+    return f"<h3>{title}</h3><p>{description}</p>"
 
 def construct_property_table(entity_data):
     rows=[]
