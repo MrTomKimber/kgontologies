@@ -6,6 +6,7 @@
     "NamedObjects": [
         {
             "TargetClass": "http://www.acmebank.org/Person",
+            "TargetNamespace": "http://www.acmebank.org/entities/Person#",
             "Instances": [
                 {
                     "InstanceName": "Person",
@@ -16,6 +17,7 @@
         },
         {
             "TargetClass": "http://www.acmebank.org/Department",
+            "TargetNamespace": "http://www.acmebank.org/entities/Department#",
             "Instances": [
                 {
                     "InstanceName": "Department",
@@ -26,6 +28,7 @@
         },
         {
             "TargetClass": "http://www.acmebank.org/Role",
+            "TargetNamespace": "http://www.acmebank.org/entities/Role#",
             "Instances": [
                 {
                     "InstanceName": "Role",

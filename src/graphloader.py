@@ -65,6 +65,7 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
     entity_set = set()
     for obj in configuration['NamedObjects']:
         targetclass_uri = URIRef(obj['TargetClass'])
+        classbase_uri = URIRef(obj['URIBase'])
         for config_instance in obj['Instances']:
             iname = config_instance['InstanceName']
             subjecttag = config_instance['SubjectTag']
@@ -89,7 +90,7 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
                 fqn = ".".join([n for n in fqn if n is not None])
                     
                 for instance in [r[2] for r in data_graph.triples((datarow, subjecttag_spec, None))]:
-                    newobj = DataNamedObject(targetclass_uri.toPython(), fqn, fetched_label, entity_namespace)
+                    newobj = DataNamedObject(targetclass_uri.toPython(), fqn, fetched_label, classbase_uri)
 
                     if newobj.fully_qualified_name not in fqn_catalog:
                         fqn_catalog[newobj.fully_qualified_name]=newobj

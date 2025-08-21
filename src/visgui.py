@@ -357,10 +357,9 @@ class gui_rdfgraph_predicate_filter_control(object):
 class gui_visualisation_control(object):
     def __init__(self, graph, debug=False):
         self.graph = graph
-
-        # Load and bind associated ontologies for additional data enrichment
+        self.pressed=0 # Keep track of number of times the generate button gets pressed
         
-
+        # Load and bind associated ontologies for additional data enrichment
         self.type_filter = gui_rdfgraph_nodetype_filter_control(graph)
         self.node_styler = gui_rdfgraph_node_styler_controls(graph)
         self.pred_filter = gui_rdfgraph_predicate_filter_control(graph)
@@ -403,6 +402,7 @@ class gui_visualisation_control(object):
         }
 
         self._ui_output_canvas = widgets.Output()
+        self._ui_debug_canvas = widgets.Output()
         
         self.generate_vis_button = widgets.Button(
             description="Generate Visualisation", 
@@ -423,7 +423,7 @@ class gui_visualisation_control(object):
                                       "Style Predicates"])
         
         
-        user_layout = widgets.VBox([accordion, self.generate_vis_button, self._ui_output_canvas], 
+        user_layout = widgets.VBox([accordion, self.generate_vis_button, self._ui_output_canvas, self._ui_debug_canvas], 
                                    layout=widgets.Layout(width="100%"))
         
         self.control = user_layout
@@ -431,7 +431,10 @@ class gui_visualisation_control(object):
         
 
     def generate_visualisation(self, b):
-
+        self.pressed = self.pressed + 1
+        self._ui_debug_canvas.clear_output()
+        with self._ui_debug_canvas:
+            print(f"Button Pressed {self.pressed}")
         # Get updated filter details
         exclude_types = set(self.type_filter.get_all_possible_uris())-set(self.type_filter.get_selected_uris())
         exclude_preds = set(self.pred_filter.get_all_possible_uris()) - set(self.pred_filter.get_selected_uris())
@@ -463,7 +466,7 @@ class gui_visualisation_control(object):
         with self._ui_output_canvas:
             display(HTML(fig.to_html_partial()))
 
-        return new_g, nx_g, fig
+        #return new_g, nx_g, fig
 
 def node_decorator_function(node, data, type_mapping):
     """A function for updating node decoration details based on type and/or other information.

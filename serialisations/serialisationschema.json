@@ -63,6 +63,9 @@
                 "TargetClass": {
                     "description": "The URL describing the class or type to assign to this object",
                     "type" : "string"},
+                "URIBase" : {
+                    "description": "A URL segment describing the root URI for any entities created for this class",
+                    "type" : "string"},
                 "Instances": {
                     "description": "An unique instance for the headline TargetClass",
                     "type": "array",
@@ -88,7 +91,9 @@
                         "additionalItems": false
                     }
                 }
-            }
+            }, 
+            "additionalProperties": false,
+            "required" : ["TargetClass", "URIBase", "Instances"]
         },
         "RelationshipInstances": {
             "description": "A collection of mapping instances for a given Predicate relationship",

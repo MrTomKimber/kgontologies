@@ -29,7 +29,7 @@ def construct_hover_panel(entity_data, namespace_manager):
     description = "\n".join([list(v)[0] for k,v in entity_data['literals'].items() if "desc" in k.lower()])
     return f"<h3>{title}</h3><p>{description}</p>"
 
-def construct_property_table(entity_data):
+def construct_property_table(entity_data, namespace_manager):
     rows=[]
     panel_html_template="""
     <h2>Node: {title}</h2>
@@ -51,7 +51,7 @@ def construct_property_table(entity_data):
     """
     row_html_template="""<tr><th>{k}</th><td>{v}</td></tr>"""
     for k,v in entity_data['literals'].items():
-        rows.append(row_html_template.format(k=k,v="/".join([str(v.value) for v in v])))
+        rows.append(row_html_template.format(k=k.n3(namespace_manager),v="/".join([str(v.value) for v in v])))
 
     title = entity_data['node']
     etypes = entity_data['types']
@@ -143,7 +143,7 @@ def rdflib_graph_to_networkx_for_gravis_original(rdflib_graph,
                     labels = entity_data_d.get(n).get('labels')
                     if labels is None:
                         labels=[n.n3(rdflib_graph.namespace_manager)]
-                    html_packet = construct_property_table(entity_data_d[n])
+                    html_packet = construct_property_table(entity_data_d[n],rdflib_graph.namespace_manager)
                     nx_g.add_node(n, label = "/n".join(labels), shape=t_shape, color=tcolor, size=10, click=html_packet)
     # Remaining Nodes are either Literals, or are Untyped Object Nodes
         # Cycle over Literals First.
@@ -250,7 +250,7 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
                     labels = entity_data_d.get(n).get('labels')
                     if labels is None:
                         labels=[n.n3(rdflib_graph.namespace_manager)]
-                    html_packet = construct_property_table(entity_data_d[n])
+                    html_packet = construct_property_table(entity_data_d[n], namespace_manager=rdflib_graph.namespace_manager)
                     hover_packet = construct_hover_panel(entity_data_d[n], namespace_manager=rdflib_graph.namespace_manager)
                     nx_g.add_node(n, label = "/n".join(labels), click=html_packet, rdfclass=t, hover=hover_packet)
 

@@ -11,6 +11,7 @@
     "NamedObjects": [
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace",
+            "URIBase":"http://www.acmebank.org/entities/kgdmcar/entities/Namespace#",
             "Instances": [
                 {
                     "InstanceName": "Namespace",
@@ -36,6 +37,7 @@
         },
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain",
+            "URIBase":"http://www.acmebank.org/graphs/entities/Domain#",
             "Instances": [
                 {
                     "InstanceName": "Domain",
@@ -51,6 +53,7 @@
         },
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model",
+            "URIBase":"http://www.acmebank.org/graphs/entities/Model#",
             "Instances": [
                 {
                     "InstanceName": "Model",
@@ -61,6 +64,7 @@
         },
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class",
+            "URIBase":"http://www.acmebank.org/graphs/entities/Class#",
             "Instances": [
                 {
                     "InstanceName": "Class",
@@ -81,6 +85,7 @@
         },
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute",
+            "URIBase":"http://www.acmebank.org/graphs/entities/Attribute#",
             "Instances": [
                 {
                     "InstanceName": "Attribute",
@@ -101,6 +106,7 @@
         },
         {
             "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship",
+            "URIBase":"http://www.acmebank.org/graphs/entities/Relationship#",
             "Instances": [
                 {
                     "InstanceName": "Relationship",
