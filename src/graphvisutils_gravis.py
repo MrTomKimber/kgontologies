@@ -12,6 +12,23 @@ import pandas as pd
 
 import src.graphloader as graphloader
 
+def construct_hover_panel(entity_data, namespace_manager):
+    labelgets = entity_data.get('labels', [])
+    if labelgets is None:
+        labelgets=[entity_data['node'].n3(namespace_manager)]
+    labels = [l for l in labelgets]
+    title = labels[0]
+    if title[0]=="\"" and title[-1]=="\"":
+        title=title[1:-1]
+    typegets = entity_data.get('types',[])
+    if typegets is None:
+        typegets=[Literal("No type recorded")]
+    types = [t.n3(namespace_manager) for t in typegets]
+    
+        
+    subtitle = list(types)[0]
+    description = "\n".join([list(v)[0] for k,v in entity_data['literals'].items() if "desc" in k.lower()])
+    return f"<h2>{title}</h2><h3>{subtitle}</h3><p>{description}</p>"
 
 def construct_property_table(entity_data):
     rows=[]
@@ -235,7 +252,9 @@ def rdflib_graph_to_networkx_for_gravis(rdflib_graph,
                     if labels is None:
                         labels=[n.n3(rdflib_graph.namespace_manager)]
                     html_packet = construct_property_table(entity_data_d[n])
-                    nx_g.add_node(n, label = "/n".join(labels), click=html_packet, rdfclass=t)
+                    hover_packet = construct_hover_panel(entity_data_d[n], namespace_manager=rdflib_graph.namespace_manager)
+                    nx_g.add_node(n, label = "/n".join(labels), click=html_packet, rdfclass=t, hover=hover_packet)
+
     # Remaining Nodes are either Literals, or are Untyped Object Nodes
         # Cycle over Literals First.
     for l in literals:

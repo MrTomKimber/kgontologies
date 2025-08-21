@@ -93,7 +93,7 @@ class gui_scheme_picker_multi_control(object):
         self.control = widgets.VBox(children=[self.dropdown, self.graphic], layout={'width':"100%"})
 
     def on_dropdown_change(self, change):
-        print(change)
+        
         self.graphic.value=self.render_cols[change['owner'].index]
         self.value=self.dropdown.value
 
@@ -189,7 +189,7 @@ class gui_node_styletab_control(object):
 
 
     def update(self, **kwargs):
-        print(kwargs)
+        
         for k,v in kwargs.items():
             if k in self.implemented_kwarg_list:
                 if k.lower()=="shape":
@@ -279,8 +279,8 @@ class gui_rdfgraph_node_styler_controls(object):
 
 
     def on_theme_change(self, change):
-        with self.debug:
-            print(change)
+        #with self.debug:
+        #    print(change)
         self.theme=change['new']
         type_style_mappings=self.create_type_style_mapping(
                                                           type_dict=self.type_dict, 
@@ -600,7 +600,7 @@ class gui_predicate_styletab_control(object):
 
 
     def update(self, **kwargs):
-        print(kwargs)
+        
         for k,v in kwargs.items():
             if k in self.implemented_kwarg_list:
                 if k.lower()=="size":
@@ -644,7 +644,7 @@ class gui_rdfgraph_predicate_styler_controls(object):
 
 
     def create_predicate_style_mapping(self, pred_dict, colour_scheme, default_size, default_label_size):
-        print(pred_dict)
+        
         colour_cycle = colourschemes.gen_cycle(colour_scheme)
         pred_style_mapping = dict()
         
