@@ -293,8 +293,11 @@ def decorate_networkx_edges_with_function(nx_g, edge_dec_f):
     """Given a function whose parameters accept an edge name, and a dictionary of attributes, 
     and whose return type is a dict, cycle over the available nodes in the graph
     and apply the updated values returned from the function onto the various nodes."""
-    for s,f,d in nx_g.edges(data=True):
+    # N.B. The expectation here is that nx_g is a multidigraph
+    # i.e. that the details returned from the edge call will contain a key value distinguishing
+    #      each individually.
+    for s,f,e,d in nx_g.edges(keys=True, data=True):
         dec_dict = edge_dec_f((s,f),d)
         for k,v in dec_dict.items():
-            nx_g[s][f][0][k]=v
+            nx_g[s][f][e][k]=v
     return nx_g

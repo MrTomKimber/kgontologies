@@ -437,8 +437,6 @@ class gui_visualisation_control(object):
         exclude_preds = set(self.pred_filter.get_all_possible_uris()) - set(self.pred_filter.get_selected_uris())
         exclude_nodes = set() ## Not implemented
 
-        print(exclude_types)
-        print(exclude_preds)
         # Apply new filters to regenerate display graph
         new_g = queryaugment.filter_triples_from_graph(self.graph, exclude_nodes, exclude_preds, exclude_types)
         # Rebind any namespaces to graph
@@ -452,12 +450,12 @@ class gui_visualisation_control(object):
                                                                 hide_literals=True)
         type_mapping_d = self.node_styler.get_typed_mappings()
         pred_mapping_d = self.pred_styler.get_typed_mappings()
-
+        
         ndf = partial(node_decorator_function, type_mapping=type_mapping_d)
         pdf = partial(edge_decorator_function, pred_mapping=pred_mapping_d)
         nx_g = graphvisutils_gravis.decorate_networkx_nodes_with_function(nx_g, ndf)
         nx_g = graphvisutils_gravis.decorate_networkx_edges_with_function(nx_g, pdf)
-
+        self.nx_g = nx_g
         # Generate Figure
         fig = gv.vis(nx_g, **self.vis_graph_settings)
         # Apply figure to output canvas
@@ -657,6 +655,8 @@ class gui_rdfgraph_predicate_styler_controls(object):
                                              "size" : default_size, 
                                              "colour" : c, 
                                              "color" : c, 
+                                             "border_color" : c, 
+                                             "border_size" : 1, 
                                              "label_size" : default_label_size}
         
         return pred_style_mapping
