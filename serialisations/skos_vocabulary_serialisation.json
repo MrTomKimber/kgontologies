@@ -12,7 +12,7 @@
     "NamedObjects": [
         {
             "TargetClass": "http://www.w3.org/2004/02/skos/core#ConceptScheme",
-            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar",
+            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar#",
             "Instances": [
                 {
                     "InstanceName": "ConceptScheme",
@@ -23,11 +23,36 @@
         },
         {
             "TargetClass": "http://www.w3.org/2004/02/skos/core#Concept",
-            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar",
+            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar#",
             "Instances": [
                 {
                     "InstanceName": "Concept",
                     "SubjectTag": "Concept",
+                    "ParentTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "BroaderConcept",
+                    "SubjectTag": "Broader",
+                    "ParentTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "NarrowerConcept",
+                    "SubjectTag": "Narrower",
+                    "ParentTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "RelatedConcept",
+                    "SubjectTag": "Related",
+                    "ParentTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "CloseMatchConcept",
+                    "SubjectTag": "CloseMatch",
+                    "ParentTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "ExactMatchConcept",
+                    "SubjectTag": "ExactMatch",
                     "ParentTag": "ConceptScheme"
                 }
             ]
@@ -50,7 +75,8 @@
                 {
                     "InstanceName": "ConceptIsBroaderThan",
                     "SubjectTag": "Concept",
-                    "ObjectTag": "Broader"
+                    "ObjectTag": "Broader", 
+                    "EnableMultiValues": true
                 }
             ]
         },
@@ -60,7 +86,8 @@
                 {
                     "InstanceName": "ConceptIsNarrowerThan",
                     "SubjectTag": "Concept",
-                    "ObjectTag": "Narrower"
+                    "ObjectTag": "Narrower", 
+                    "EnableMultiValues": true
                 }
             ]
         },
@@ -70,7 +97,8 @@
                 {
                     "InstanceName": "ConceptIsRelatedTo",
                     "SubjectTag": "Concept",
-                    "ObjectTag": "Related"
+                    "ObjectTag": "Related", 
+                    "EnableMultiValues": true
                 }
             ]
         },
@@ -80,7 +108,8 @@
                 {
                     "InstanceName": "ConceptIsACloseMatchFor",
                     "SubjectTag": "Concept",
-                    "ObjectTag": "CloseMatch"
+                    "ObjectTag": "CloseMatch", 
+                    "EnableMultiValues": true
                 }
             ]
         },
@@ -90,7 +119,8 @@
                 {
                     "InstanceName": "ConceptIsAnExactMatchFor",
                     "SubjectTag": "Concept",
-                    "ObjectTag": "ExactMatch"
+                    "ObjectTag": "ExactMatch", 
+                    "EnableMultiValues": true
                 }
             ]
         }
@@ -132,12 +162,23 @@
             ]
         },
         {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptprefLabelToKGLabel",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "prefLabel"
+                }
+            ]
+        },
+        {
             "Predicate": "http://www.w3.org/2004/02/skos/core#altLabel",
             "Instances": [
                 {
                     "InstanceName": "Concept",
                     "SubjectTag": "Concept",
-                    "LiteralTag": "altLabel"
+                    "LiteralTag": "altLabel", 
+                    "EnableMultiValues": true
                 }
             ]
         },
@@ -177,7 +218,8 @@
                 {
                     "InstanceName": "Concept",
                     "SubjectTag": "Concept",
-                    "LiteralTag": "SeeAlso"
+                    "LiteralTag": "SeeAlso", 
+                    "EnableMultiValues": true
                 }
             ]
         }

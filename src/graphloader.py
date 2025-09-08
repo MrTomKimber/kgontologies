@@ -23,6 +23,7 @@ def ontology_graph():
     return ontology_graph
 
 def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
+    """Reads in a dataframe and converts it into an anonymous graph"""
 
     DATA = Namespace(data_namespace)
     g = Graph(bind_namespaces="rdflib")
@@ -75,7 +76,6 @@ def process_anonymous_data_graph(data_graph, configuration, data_namespace="http
             uqn_tag_spec = [DATA[f"column({t})"] for t in url_traverse_spec]
             entity_catalog[targetclass_uri]=dict()
             
-            #print( "T", targetclass_uri, uqn_tag_spec, subjecttag_spec)
             # Cycle over available data rows
             for datarow in [r[0] for r in data_graph.triples((None, RDF.type, DATA['row']))]:
                 # For each datarow, extract instances of targetclass

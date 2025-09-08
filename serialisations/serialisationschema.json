@@ -119,6 +119,10 @@
                             "ObjectTag": {
                                 "description" : "The column-name to be used for this instance-mapping to identify the object of the relationship.",
                                 "type": "string"
+                            },
+                            "EnableMultiValues" : {
+                                "description" : "Set to true to treat the field as potentially containing multiple values separated by commas", 
+                                "type" : "boolean"
                             }
                         },
                         "additionalItems": false
@@ -151,6 +155,10 @@
                             "LiteralTag": {
                                 "description" : "The column-name to be used for this instance-mapping to identify the literal value of the property.",
                                 "type": "string"
+                            },
+                            "EnableMultiValues" : {
+                                "description" : "Set to true to treat the field as potentially containing multiple values separated by commas", 
+                                "type" : "boolean"
                             }
                         },
                         "additionalItems": false
