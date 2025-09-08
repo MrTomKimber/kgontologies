@@ -1,0 +1,185 @@
+{
+    "$schema": "./serialisationschema.json",
+    "Namespaces": {
+        "DMCAR": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#",
+        "KGNAM": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#",
+        "skos": "http://www.w3.org/2004/02/skos/core#"
+    },
+    "GlobalVariables": {
+        "GlobalVariableName": "Value",
+        "SerialisationName": "DMCAR-Vocabulary"
+    },
+    "NamedObjects": [
+        {
+            "TargetClass": "http://www.w3.org/2004/02/skos/core#ConceptScheme",
+            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptScheme",
+                    "SubjectTag": "ConceptScheme",
+                    "ParentTag": null
+                }
+            ]
+        },
+        {
+            "TargetClass": "http://www.w3.org/2004/02/skos/core#Concept",
+            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "ParentTag": "ConceptScheme"
+                }
+            ]
+        }
+    ],
+    "Relationships": [
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#inScheme",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsInScheme",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "ConceptScheme"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#broader",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsBroaderThan",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "Broader"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#narrower",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsNarrowerThan",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "Narrower"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#related",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsRelatedTo",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "Related"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#closeMatch",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsACloseMatchFor",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "CloseMatch"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#exactMatch",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptIsAnExactMatchFor",
+                    "SubjectTag": "Concept",
+                    "ObjectTag": "ExactMatch"
+                }
+            ]
+        }
+    ],
+    "Properties": [
+        {
+            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptSchemeName",
+                    "SubjectTag": "ConceptScheme",
+                    "LiteralTag": "ConceptScheme"
+                },
+                {
+                    "InstanceName": "ConceptName",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "Concept"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#notation",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptNotation",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "Notation"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "Instances": [
+                {
+                    "InstanceName": "ConceptprefLabel",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "prefLabel"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#altLabel",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "altLabel"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#hiddenLabel",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "hiddenLabel"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#definition",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "Definition"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/2004/02/skos/core#example",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "Example"
+                }
+            ]
+        },
+        {
+            "Predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#seeAlso",
+            "Instances": [
+                {
+                    "InstanceName": "Concept",
+                    "SubjectTag": "Concept",
+                    "LiteralTag": "SeeAlso"
+                }
+            ]
+        }
+    ]
+}
