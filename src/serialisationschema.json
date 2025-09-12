@@ -86,6 +86,10 @@
                                     "string",
                                     "null"
                                 ]
+                            },                            
+                            "EnableMultiValues" : {
+                                "description" : "Set to true to treat the field as potentially containing multiple values separated by commas", 
+                                "type" : "boolean"
                             }
                         },
                         "additionalItems": false

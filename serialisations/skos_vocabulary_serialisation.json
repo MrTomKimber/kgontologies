@@ -33,27 +33,32 @@
                 {
                     "InstanceName": "BroaderConcept",
                     "SubjectTag": "Broader",
-                    "ParentTag": "ConceptScheme"
+                    "ParentTag": "ConceptScheme",
+                    "EnableMultiValues": true
                 },
                 {
                     "InstanceName": "NarrowerConcept",
                     "SubjectTag": "Narrower",
-                    "ParentTag": "ConceptScheme"
+                    "ParentTag": "ConceptScheme",
+                    "EnableMultiValues": true
                 },
                 {
                     "InstanceName": "RelatedConcept",
                     "SubjectTag": "Related",
-                    "ParentTag": "ConceptScheme"
+                    "ParentTag": "ConceptScheme",
+                    "EnableMultiValues": true
                 },
                 {
                     "InstanceName": "CloseMatchConcept",
                     "SubjectTag": "CloseMatch",
-                    "ParentTag": "ConceptScheme"
+                    "ParentTag": "ConceptScheme",
+                    "EnableMultiValues": true
                 },
                 {
                     "InstanceName": "ExactMatchConcept",
                     "SubjectTag": "ExactMatch",
-                    "ParentTag": "ConceptScheme"
+                    "ParentTag": "ConceptScheme",
+                    "EnableMultiValues": true
                 }
             ]
         }
@@ -175,7 +180,7 @@
             "Predicate": "http://www.w3.org/2004/02/skos/core#altLabel",
             "Instances": [
                 {
-                    "InstanceName": "Concept",
+                    "InstanceName": "ConceptaltLabel",
                     "SubjectTag": "Concept",
                     "LiteralTag": "altLabel", 
                     "EnableMultiValues": true
@@ -186,7 +191,7 @@
             "Predicate": "http://www.w3.org/2004/02/skos/core#hiddenLabel",
             "Instances": [
                 {
-                    "InstanceName": "Concept",
+                    "InstanceName": "hiddenLabel",
                     "SubjectTag": "Concept",
                     "LiteralTag": "hiddenLabel"
                 }
@@ -196,7 +201,7 @@
             "Predicate": "http://www.w3.org/2004/02/skos/core#definition",
             "Instances": [
                 {
-                    "InstanceName": "Concept",
+                    "InstanceName": "ConceptDefinition",
                     "SubjectTag": "Concept",
                     "LiteralTag": "Definition"
                 }
@@ -206,7 +211,7 @@
             "Predicate": "http://www.w3.org/2004/02/skos/core#example",
             "Instances": [
                 {
-                    "InstanceName": "Concept",
+                    "InstanceName": "ConceptExample",
                     "SubjectTag": "Concept",
                     "LiteralTag": "Example"
                 }
@@ -216,7 +221,7 @@
             "Predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#seeAlso",
             "Instances": [
                 {
-                    "InstanceName": "Concept",
+                    "InstanceName": "ConceptseeAlso",
                     "SubjectTag": "Concept",
                     "LiteralTag": "SeeAlso", 
                     "EnableMultiValues": true

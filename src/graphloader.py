@@ -54,8 +54,6 @@ def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
                 g.add((row_url, p_url, o_literal))
     return g
 
-
-
 def process_anonymous_data_graph(data_graph, configuration, data_namespace="http://data#", entity_namespace="http://entity#"):
     DATA = Namespace(data_namespace)
     result_graph = Graph(bind_namespaces="rdflib")
