@@ -220,7 +220,6 @@ class SerialisationInstanceSpecification(object):
     def extract_valid_fqns(rowurl, data_graph, fetch_key):
         f_key = [f for f in fetch_key if f!="<root>"]
         raw_fqn = SerialisationInstanceSpecification.get_keylist_from_datarow(rowurl, data_graph, f_key)
-        print(raw_fqn)
         # Each block of the fqn could contain multiple values - we need to build the collection of fqns that
         # could possibly be constructed from each combination -  it's the cartesian product that we're looking
         # for. 
@@ -377,42 +376,49 @@ class RelationshipInstanceSpecification(SerialisationInstanceSpecification):
         candidate_subject_spec = self.parent_serialisation._traverse_hierarchy_path(self._subject__column)
         candidate_object_spec = self.parent_serialisation._traverse_hierarchy_path(self._object__column)
 
-        # Get the FQNs from the data row - but these can be tricky in that if no match for the root of the FQN is found, it still shows, but with element[0] being empty
+        # Get the FQNs from the data row - but these can be tricky in that if no match for the root of the FQN is found, 
+        # it still shows, but with element[0] being empty
         subject_fqns = SerialisationInstanceSpecification.extract_valid_fqns(row_uri, data_graph, candidate_subject_spec)
         object_fqns = SerialisationInstanceSpecification.extract_valid_fqns(row_uri, data_graph, candidate_object_spec)
+        subject_entities=[]
+        if subject_fqns is not None:
+            for fqn in subject_fqns:
+                subject_entities.append ( entity_fqn_index.get(fqn, None) )
 
-        # Perform a lookup against the entity_fqn_index to retrieve any valid objects
-        if not any([r is None for r in [subject_fqn, object_fqn]]):
-            subject_entity = entity_fqn_index.get(subject_fqn, subject_fqn)
-            object_entity = entity_fqn_index.get(object_fqn, object_fqn)
-        else:
-            # There's not enough data to populate this relationship
-            return None
+        object_entities=[]
+        if object_fqns is not None:
+            for fqn in object_fqns:
+                object_match = entity_fqn_index.get(fqn, None)
+                if object_match is None:
+                    print(f"\t\tObject match not found for {fqn}")
+                object_entities.append ( object_match )
+
+        # Review the returned object lists and make a call on whether there's enough information to accept
+        # whatever matches are returned
 
 
-        return (subject_entity, object_entity)
+        return (subject_entities, object_entities)
 
 class RelationObject(object):
-    def __init__(self, subject, object):
-        pass
+    def __init__(self, subject, object, relation_uri):
+        self.subject = subject
+        self.object = object
+        self.relation_uri = relation_uri
 
     def rehash(self):
-        self.hash = md5(".".join([self.label, self.fully_qualified_name, self.type]).encode('utf-8')).hexdigest()
+        self.hash = md5(".".join([self.label, self.subject.fully_qualified_name, self.object.fully_qualified_name, self.type]).encode('utf-8')).hexdigest()
         return self.hash
 
     def to_triples(self):
         triples = []
-        for t in self.types:
-            triples.append((URIRef(self.uri), RDF.type, URIRef(t)))
 
         for n in self.names:
-            triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name"), Literal(n)))
-        
-        triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#FullyQualifiedName"), Literal(self.fully_qualified_name)))
+            triples.append((URIRef(self.subject.uri), URIRef(self.relation_uri), URIRef(self.object.uri)))
+
         return triples
                 
     def __repr__(self):
-        return f"<NamedObject:{self.types[0]}//{self.fully_qualified_name}>({self.uri})>"
+        return f"<Relation:{self.relation_uri}//<({self.subject.uri}-{self.object.uri})>"
 
 
 class PropertyInstanceSpecification(SerialisationInstanceSpecification):
