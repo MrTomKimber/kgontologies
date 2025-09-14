@@ -1,6 +1,7 @@
 from itertools import cycle
 
-colour_schemes = {"rich10" : [  "#001219", "#005f73", 
+colour_schemes = {"bold4" :  ["#ff3e3a", "#0496ff","#ffbc42","#17a600"],
+                  "rich10" : [  "#001219", "#005f73", 
                                 "#0a9396", "#94d2bd", 
                                 "#e9d8a6", "#ee9b00", 
                                 "#ca6702", "#bb3e03", 
@@ -33,8 +34,8 @@ colour_schemes = {"rich10" : [  "#001219", "#005f73",
                                 "#b2e061", "#bd7ebe", 
                                 "#ffb55a", "#ffee65", 
                                 "#beb9db", "#fdcce5", 
-                                "#8bd3c7"],
-                "bold4" :  ["#ff3e3a", "#0496ff","#ffbc42","#17a600"]
+                                "#8bd3c7"]
+                
                             }
 
 def gen_cycle(colour_scheme):

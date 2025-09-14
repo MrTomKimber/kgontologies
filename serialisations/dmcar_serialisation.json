@@ -1,8 +1,8 @@
 {
-    "$schema": "./serialisationschema.json",
+    "$schema": "../src/serialisationschema.json",
     "Namespaces": {
-        "DMCAR": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#",
-        "KGNAM": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"
+        "DMCAR": "https://kgraph.foo/onto/kgdmcar#",
+        "KGNAM": "https://kgraph.foo/onto/kgnaming#"
     },
     "GlobalVariables": {
         "GlobalVariableName": "Value",
@@ -10,8 +10,8 @@
     },
     "NamedObjects": [
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace",
-            "URIBase":"http://www.acmebank.org/entities/kgdmcar/entities/Namespace#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Namespace",
+            "URIBase":"https://kgraph.foo/bar/entities/Namespace#",
             "Instances": [
                 {
                     "InstanceName": "Namespace",
@@ -36,8 +36,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain",
-            "URIBase":"http://www.acmebank.org/graphs/entities/Domain#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Domain",
+            "URIBase":"https://kgraph.foo/bar/entities/Domain#",
             "Instances": [
                 {
                     "InstanceName": "Domain",
@@ -52,8 +52,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model",
-            "URIBase":"http://www.acmebank.org/graphs/entities/Model#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Model",
+            "URIBase":"http://kgraph.foo/bar/entities/Model#",
             "Instances": [
                 {
                     "InstanceName": "Model",
@@ -63,8 +63,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class",
-            "URIBase":"http://www.acmebank.org/graphs/entities/Class#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Class",
+            "URIBase":"http://kgraph.foo/bar/entities/Class#",
             "Instances": [
                 {
                     "InstanceName": "Class",
@@ -84,8 +84,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute",
-            "URIBase":"http://www.acmebank.org/graphs/entities/Attribute#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Attribute",
+            "URIBase":"http://kgraph.foo/bar/entities/Attribute#",
             "Instances": [
                 {
                     "InstanceName": "Attribute",
@@ -105,8 +105,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship",
-            "URIBase":"http://www.acmebank.org/graphs/entities/Relationship#",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Relationship",
+            "URIBase":"http://kgraph.foo/bar/entities/Relationship#",
             "Instances": [
                 {
                     "InstanceName": "Relationship",
@@ -118,7 +118,7 @@
     ],
     "Properties": [
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Name",
             "Instances": [
                 {
                     "InstanceName": "NamespaceName",
@@ -153,7 +153,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Label",
             "Instances": [
                 {
                     "InstanceName": "NamespaceLabel",
@@ -188,7 +188,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Description",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Description",
             "Instances": [
                 {
                     "InstanceName": "NamespaceDescription",
@@ -223,7 +223,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#ModelHasType",
             "Instances": [
                 {
                     "InstanceName": "ModelHasType",
@@ -233,7 +233,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#SequenceNumber",
             "Instances": [
                 {
                     "InstanceName": "AttributeSequenceNumber",
@@ -243,7 +243,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#DataTypeName",
             "Instances": [
                 {
                     "InstanceName": "AttributeDataTypeName",
@@ -253,7 +253,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#ValueConstraints",
             "Instances": [
                 {
                     "InstanceName": "AttributeValueConstraints",
@@ -263,7 +263,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#IsNullable",
             "Instances": [
                 {
                     "InstanceName": "AttributeIsNullable",
@@ -273,7 +273,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#AttributeIsPK",
             "Instances": [
                 {
                     "InstanceName": "AttributeIsPK",
@@ -283,7 +283,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipHasType",
             "Instances": [
                 {
                     "InstanceName": "RelationshipHasType",
@@ -293,7 +293,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipFromCardinality",
             "Instances": [
                 {
                     "InstanceName": "RelationshipFromCardinality",
@@ -303,7 +303,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipToCardinality",
             "Instances": [
                 {
                     "InstanceName": "RelationshipToCardinality",
@@ -315,7 +315,7 @@
     ],
     "Relationships": [
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#DomainIsMemberOfParentDomain",
             "Instances": [
                 {
                     "InstanceName": "DomainIsMemberOfParentDomain",
@@ -324,7 +324,7 @@
                 }]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfDomain",
             "Instances": [
                 {
                     "InstanceName": "ClassIsMemberOfDomain",
@@ -333,7 +333,7 @@
                 }]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfModel",
             "Instances": [
 
                 {
@@ -343,7 +343,7 @@
                 }]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipIsMemberOfModel",
             "Instances": [
 
                 {
@@ -353,7 +353,7 @@
                 }]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfClass",
             "Instances": [
 
                 {
@@ -363,7 +363,7 @@
                 }]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfSchema",
             "Instances": [
 
                 {
@@ -375,7 +375,7 @@
 
 
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#isScopedWithin",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#isScopedWithin",
             "Instances": [
                 {
                     "InstanceName": "DomainIsScopedWithinDomainNamespace",
@@ -420,7 +420,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipFromClass",
             "Instances": [
                 {
                     "InstanceName": "RelationshipFromClass",
@@ -430,7 +430,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipToClass",
             "Instances": [
                 {
                     "InstanceName": "RelationshipToClass",
@@ -440,7 +440,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipFromAttribute",
             "Instances": [
                 {
                     "InstanceName": "RelationshipFromAttribute",
@@ -450,7 +450,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#RelationshipToAttribute",
             "Instances": [
                 {
                     "InstanceName": "RelationshipToAttribute",

@@ -112,9 +112,9 @@ def rdflib_graph_to_networkx_for_gravis_original(rdflib_graph,
             literals.add(o)
     # Define colour cycles for nodes and edges
     if node_colour_scheme is None:  
-        node_colour_scheme = "spectral10"
+        node_colour_scheme = "bold4"
     if edge_colour_scheme is None:
-        edge_colour_scheme = "muted_rainbow10"
+        edge_colour_scheme = "bold4"
     
     n_c_cycle = colourschemes.gen_cycle(node_colour_scheme)
     e_c_cycle = colourschemes.gen_cycle(edge_colour_scheme)    

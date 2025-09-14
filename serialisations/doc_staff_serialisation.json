@@ -1,4 +1,4 @@
-{   "$schema": "./serialisationschema.json",
+{   "$schema": "../src/serialisationschema.json",
     "GlobalVariables": {
         "GlobalVariableName": "Value",
         "SerialisationName": "ACMEBankStaff-Schema"

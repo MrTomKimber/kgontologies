@@ -1,8 +1,8 @@
 {
-    "$schema": "./serialisationschema.json",
+    "$schema": "../src/serialisationschema.json",
     "Namespaces": {
-        "DMCAR": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#",
-        "KGNAM": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"
+        "DMCAR": "https://kgraph.foo/onto/kgdmcar#",
+        "KGNAM": "https://kgraph.foo/onto/kgnaming#"
     },
     "GlobalVariables": {
         "GlobalVariableName": "Value",
@@ -10,8 +10,8 @@
     },
     "NamedObjects": [
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace",
-            "URIBase": "http://www.semanticweb.org/tomk/entities/",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Namespace",
+            "URIBase": "http://kgraph.foo/bar/entities/",
             "Instances": [
                 {
                     "InstanceName": "Namespace",
@@ -21,8 +21,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema",
-            "URIBase": "http://www.semanticweb.org/tomk/entities/",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Schema",
+            "URIBase": "http://kgraph.foo/bar/entities/",
             "Instances": [
                 {
                     "InstanceName": "Schema",
@@ -32,8 +32,8 @@
             ]
         },
         {
-            "TargetClass": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute",
-            "URIBase": "http://www.semanticweb.org/tomk/entities/",
+            "TargetClass": "https://kgraph.foo/onto/kgdmcar#Attribute",
+            "URIBase": "http://kgraph.foo/bar/entities/",
             "Instances": [
                 {
                     "InstanceName": "Attribute",
@@ -45,7 +45,7 @@
     ],
     "Relationships": [
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#memberOf",
             "Instances": [
                 {
                     "InstanceName": "AttributeIsMemberOfSchema",
@@ -57,7 +57,7 @@
     ],
     "Properties": [
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Name",
             "Instances": [
                 {
                     "InstanceName": "NamespaceName",
@@ -77,7 +77,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Label",
             "Instances": [
                 {
                     "InstanceName": "NamespaceLabel",
@@ -97,7 +97,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Description",
+            "Predicate": "https://kgraph.foo/onto/kgnaming#Description",
             "Instances": [
                 {
                     "InstanceName": "NamespaceDescription",
@@ -117,7 +117,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#SequenceNumber",
             "Instances": [
                 {
                     "InstanceName": "AttributeSequence",
@@ -127,7 +127,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#DataTypeName",
             "Instances": [
                 {
                     "InstanceName": "AttributeDataType",
@@ -137,7 +137,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#IsNullable",
             "Instances": [
                 {
                     "InstanceName": "AttributeNulls",
@@ -147,7 +147,7 @@
             ]
         },
         {
-            "Predicate": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints",
+            "Predicate": "https://kgraph.foo/onto/kgdmcar#ValueConstraints",
             "Instances": [
                 {
                     "InstanceName": "AttributeValueConstraints",

@@ -1,8 +1,8 @@
 {
-    "$schema": "./serialisationschema.json",
+    "$schema": "../src/serialisationschema.json",
     "Namespaces": {
-        "DMCAR": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#",
-        "KGNAM": "http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#",
+        "DMCAR": "https://kgraph.foo/onto/kgdmcar#",
+        "KGNAM": "https://kgraph.foo/onto/kgnaming#",
         "skos": "http://www.w3.org/2004/02/skos/core#"
     },
     "GlobalVariables": {
@@ -12,7 +12,7 @@
     "NamedObjects": [
         {
             "TargetClass": "http://www.w3.org/2004/02/skos/core#ConceptScheme",
-            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar#",
+            "URIBase": "https://kgraph.foo/skos/kgdmcar#",
             "Instances": [
                 {
                     "InstanceName": "ConceptScheme",
@@ -23,7 +23,7 @@
         },
         {
             "TargetClass": "http://www.w3.org/2004/02/skos/core#Concept",
-            "URIBase": "http://www.semanticweb.org/tomk/skos/dmcar#",
+            "URIBase": "https://kgraph.foo/skos/kgdmcar#",
             "Instances": [
                 {
                     "InstanceName": "Concept",

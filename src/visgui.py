@@ -208,7 +208,7 @@ class gui_node_styletab_control(object):
 
 class gui_rdfgraph_node_styler_controls(object):
 
-    def __init__(self, graph, default_scheme='dutch9', default_size=20, default_label_size=10, debug=False):
+    def __init__(self, graph, default_scheme='bold4', default_size=20, default_label_size=10, debug=False):
         self.schemes_d = colourschemes.colour_schemes
         self.graph = graph
         self._ui_theme_picker = gui_scheme_picker_multi_control(self.schemes_d)
@@ -355,8 +355,9 @@ class gui_rdfgraph_predicate_filter_control(object):
         
 
 class gui_visualisation_control(object):
-    def __init__(self, graph, debug=False):
+    def __init__(self, graph, ontology_graph=None, debug=False):
         self.graph = graph
+        self.ontology_graph = ontology_graph
         self.pressed=0 # Keep track of number of times the generate button gets pressed
         
         # Load and bind associated ontologies for additional data enrichment
@@ -448,7 +449,7 @@ class gui_visualisation_control(object):
         # Apply styling choices to graph
 
         nx_g = graphvisutils_gravis.rdflib_graph_to_networkx_for_gravis(new_g, 
-                                                                ontology_context_graph=None, 
+                                                                ontology_context_graph=self.ontology_graph, 
                                                                 hide_types=True, 
                                                                 hide_literals=True)
         type_mapping_d = self.node_styler.get_typed_mappings()
@@ -616,7 +617,7 @@ class gui_predicate_styletab_control(object):
 
 class gui_rdfgraph_predicate_styler_controls(object):
 
-    def __init__(self, graph, default_scheme='dutch9', default_size=2, default_label_size=10, debug=False):
+    def __init__(self, graph, default_scheme='bold4', default_size=2, default_label_size=10, debug=False):
         self.schemes_d = colourschemes.colour_schemes
         self.graph = graph
         self._ui_theme_picker = gui_scheme_picker_multi_control(self.schemes_d)
