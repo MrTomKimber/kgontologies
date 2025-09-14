@@ -324,8 +324,7 @@ class DataNamedObject(object):
     def to_triples(self):
         triples = []
         triples.append((URIRef(self.uri), RDF.type, URIRef(self.type)))
-        #triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Label"), Literal(self.label)))
-        triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#FullyQualifiedName"), Literal(self.fully_qualified_name)))
+        triples.append((URIRef(self.uri), URIRef("https://kgraph.foo/onto/kgnaming#FullyQualifiedName"), Literal(self.fully_qualified_name)))
         return triples
         
                 

@@ -141,16 +141,21 @@ class Serialisation(object):
         # linking to properties in the dataframe
         raw_graph = self._rdflib_graph_from_dataframe(dataframe)
         self.populate_entity_fqn_index(raw_graph)
-
+        triple_generating_objects = list(self.entity_fqn_index.values())
+        
+        
         # Once the entities are defined, next it's time to link them all via the various relationship linkages
         for datarow in [r[0] for r in raw_graph.triples((None, RDF.type, Serialisation.DATA['row']))]:
-            for s in [s for s in self.specifications.values() if isinstance(s, RelationshipInstanceSpecification)]:
-                newlink = s.constructRelationFromDataGraphRow(datarow, raw_graph, self.entity_fqn_index)
+            for s in [s for s in self.specifications.values()] :
+                if isinstance(s, RelationshipInstanceSpecification):
+                    triple_generating_objects.extend( s.constructRelationFromDataGraphRow(datarow, raw_graph, self.entity_fqn_index))
+                elif isinstance(s, PropertyInstanceSpecification):
+                    triple_generating_objects.extend( s.constructPropertyFromDataGraphRow(datarow, raw_graph, self.entity_fqn_index))
 
 
         return_graph = Graph(bind_namespaces="rdflib")
         return_graph
-        for e in entities:
+        for e in triple_generating_objects:
             for t in e.to_triples():
                 return_graph.add(t)
 
@@ -347,9 +352,9 @@ class NamedObject(object):
             triples.append((URIRef(self.uri), RDF.type, URIRef(t)))
 
         for n in self.names:
-            triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#Name"), Literal(n)))
+            triples.append((URIRef(self.uri), URIRef("https://kgraph.foo/onto/kgnaming#Name"), Literal(n)))
         
-        triples.append((URIRef(self.uri), URIRef("http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#FullyQualifiedName"), Literal(self.fully_qualified_name)))
+        triples.append((URIRef(self.uri), URIRef("https://kgraph.foo/onto/kgnaming#FullyQualifiedName"), Literal(self.fully_qualified_name)))
         return triples
                 
     def __repr__(self):
@@ -395,9 +400,18 @@ class RelationshipInstanceSpecification(SerialisationInstanceSpecification):
 
         # Review the returned object lists and make a call on whether there's enough information to accept
         # whatever matches are returned
+        # Since the subjects and objects might be in n>1 collections, we generate the product of both to
+        # create a single relations which consists of all combinations of both (in practice, subjects should)
+        # be singular, but the multivalues option means objects can contain multiple possibilities
+        relations = list(product(*[subject_entities,object_entities]))
+        relation_list=[]
+        for relation in relations:
+            if all([v is not None for v in relation]):
+                sobj, oobj = relation
+                relation_list.append ( RelationObject(sobj, oobj, self.target_class))
 
 
-        return (subject_entities, object_entities)
+        return relation_list
 
 class RelationObject(object):
     def __init__(self, subject, object, relation_uri):
@@ -412,8 +426,7 @@ class RelationObject(object):
     def to_triples(self):
         triples = []
 
-        for n in self.names:
-            triples.append((URIRef(self.subject.uri), URIRef(self.relation_uri), URIRef(self.object.uri)))
+        triples.append((URIRef(self.subject.uri), URIRef(self.relation_uri), URIRef(self.object.uri)))
 
         return triples
                 
@@ -434,11 +447,62 @@ class PropertyInstanceSpecification(SerialisationInstanceSpecification):
         super()._populate_column_list()
 
 
+    def constructPropertyFromDataGraphRow(self, row_uri, data_graph, entity_fqn_index):
+        # Get the subject fqn
+        candidate_subject_spec = self.parent_serialisation._traverse_hierarchy_path(self._subject__column)
+
+        # Get the FQNs from the data row - but these can be tricky in that if no match for the root of the FQN is found, 
+        # it still shows, but with element[0] being empty
+        subject_fqns = SerialisationInstanceSpecification.extract_valid_fqns(row_uri, data_graph, candidate_subject_spec)
+        subject_entities=[]
+        if subject_fqns is not None:
+            for fqn in subject_fqns:
+                subject_entities.append ( entity_fqn_index.get(fqn, None) )
+
+        # Now extract the literal contents from the data row, which should *already* respect earlier multi-values processing
+        literal_values = SerialisationInstanceSpecification.get_values_from_datarow(row_uri, data_graph, self._literal__column)
+
+        # Review the returned object lists and make a call on whether there's enough information to accept
+        # whatever matches are returned
+        # Since the subjects and objects might be in n>1 collections, we generate the product of both to
+        # create a single relations which consists of all combinations of both (in practice, subjects should)
+        # be singular, but the multivalues option means objects can contain multiple possibilities
+        relations = list(product(*[subject_entities,literal_values]))
+        relation_list=[]
+        for relation in relations:
+            if all([v is not None for v in relation]):
+                sobj, oobj = relation
+                relation_list.append ( PropertyObject(sobj, oobj, self.target_class))
+
+
+        return relation_list
+
+
 
     def __repr__(self):
         return f"<{self.__class__.__name__}:{self._instance_name}/{self._literal__column}/{self._subject__column}>"
 
 
 
+
+class PropertyObject(object):
+    def __init__(self, subject, property, relation_uri):
+        self.subject = subject
+        self.property = property
+        self.relation_uri = relation_uri
+
+    def rehash(self):
+        self.hash = md5(".".join([self.label, self.subject.fully_qualified_name, self.object.fully_qualified_name, self.type]).encode('utf-8')).hexdigest()
+        return self.hash
+
+    def to_triples(self):
+        triples = []
+
+        triples.append((URIRef(self.subject.uri), URIRef(self.relation_uri), Literal(self.property)))
+
+        return triples
+                
+    def __repr__(self):
+        return f"<Relation:{self.relation_uri}//<({self.subject.uri}-{self.property})>"
 
 

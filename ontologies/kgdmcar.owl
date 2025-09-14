@@ -1,16 +1,40 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#"
-     xml:base="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar"
+<rdf:RDF xmlns="https://kgraph.foo/onto/kgdmcar#"
+     xml:base="https://kgraph.foo/onto/kgdmcar"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:dmcar="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#"
-     xmlns:kgnam="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar">
-        <owl:imports rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"/>
+     xmlns:dmcar="https://kgraph.foo/onto/kgdmcar#"
+     xmlns:kgnam="https://kgraph.foo/onto/kgnaming#"
+     xmlns:kgnaming="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#">
+    <owl:Ontology rdf:about="https://kgraph.foo/onto/kgdmcar">
+        <owl:versionIRI rdf:resource="https://kgraph.foo/onto/kgdmcar/v1.0.0"/>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#MetaClassIsScopedWithin -->
+
+    <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#MetaClassIsScopedWithin"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#nlgPredicateTemplate -->
+
+    <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#nlgPredicateTemplate"/>
     
 
 
@@ -25,129 +49,129 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass -->
+    <!-- https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfClass">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is an attribute of {o.kgnam:FullyQualifiedName}</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfClass">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfSchema"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Class"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is an attribute of {o.kgnam:FullyQualifiedName}</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema -->
+    <!-- https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfSchema -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsMemberOfSchema">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is an attribute of {o.kgnam:FullyQualifiedName}</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#AttributeIsMemberOfSchema">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Schema"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is an attribute of {o.kgnam:FullyQualifiedName}</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain -->
+    <!-- https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfDomain -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfDomain">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is part of the {o.kgnam:FullyQualifiedName} domain.</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfDomain">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Class"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Domain"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is part of the {o.kgnam:FullyQualifiedName} domain.</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel -->
+    <!-- https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfModel -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ClassIsMemberOfModel">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of the model {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#ClassIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Class"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Model"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of the model {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain -->
+    <!-- https://kgraph.foo/onto/kgdmcar#DomainIsMemberOfParentDomain -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DomainIsMemberOfParentDomain">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a sub-domain of {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#DomainIsMemberOfParentDomain">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Domain"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Domain"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a sub-domain of {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipFromAttribute -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromAttribute">
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipFromAttribute">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship is referenced using the foreign key {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship is referenced using the foreign key {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
         <rdfs:comment>The attribute on the entity that acts as a foreign key for this relationship,</rdfs:comment>
         <rdfs:label>FromAttribute</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipFromClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromClass">
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipFromClass">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship links from {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Class"/>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship links from {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
         <rdfs:comment>The class from which the relationship is referenced.</rdfs:comment>
         <rdfs:label>FromClass</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipIsMemberOfModel -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipIsMemberOfModel">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of the {o.kgnam:FullyQualifiedName} model.</kgnam:nlgPredicateTemplate>
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="https://kgraph.foo/onto/kgdmcar#memberOf"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Model"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of the {o.kgnam:FullyQualifiedName} model.</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipToAttribute -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToAttribute">
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipToAttribute">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship is resolved using the primary key {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship is resolved using the primary key {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
         <rdfs:comment>The attribute on the referenced entity that acts as primary key within the context of this relationship.</rdfs:comment>
         <rdfs:label>ToAttribute</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipToClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToClass">
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipToClass">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class"/>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship links to {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <rdfs:range rdf:resource="https://kgraph.foo/onto/kgdmcar#Class"/>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship links to {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
         <rdfs:comment>The class to which the relationship references.</rdfs:comment>
         <rdfs:label>ToClass</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf -->
+    <!-- https://kgraph.foo/onto/kgdmcar#memberOf -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#memberOf">
+    <owl:ObjectProperty rdf:about="https://kgraph.foo/onto/kgdmcar#memberOf">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of {o.kgnam:FullyQualifiedName}.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a member of {o.kgnam:FullyQualifiedName}.</kgnaming:nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
@@ -163,51 +187,51 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK -->
+    <!-- https://kgraph.foo/onto/kgdmcar#AttributeIsPK -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#AttributeIsPK">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#AttributeIsPK">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-        <kgnam:nlgPredicateTemplate>It is {o} that {s.kgnam:FullyQualifiedName} acts as primary key for its class.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>It is {o} that {s.kgnam:FullyQualifiedName} acts as primary key for its class.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName -->
+    <!-- https://kgraph.foo/onto/kgdmcar#DataTypeName -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#DataTypeName">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#DataTypeName">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable -->
+    <!-- https://kgraph.foo/onto/kgdmcar#IsNullable -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#IsNullable">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#IsNullable">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-        <kgnam:nlgPredicateTemplate>It is {o} that {s.kgnam:FullyQualifiedName} can contain null values.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>It is {o} that {s.kgnam:FullyQualifiedName} can contain null values.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType -->
+    <!-- https://kgraph.foo/onto/kgdmcar#ModelHasType -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ModelHasType">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#ModelHasType">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a {o} model.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Model"/>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is a {o} model.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipFromCardinality -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipFromCardinality">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipFromCardinality">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
         <rdfs:range>
             <rdfs:Datatype>
                 <owl:oneOf>
@@ -225,26 +249,26 @@
                 </owl:oneOf>
             </rdfs:Datatype>
         </rdfs:range>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a from-cardinality of {o}.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a from-cardinality of {o}.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipHasType -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipHasType">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipHasType">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a type of {o}.</kgnam:nlgPredicateTemplate>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a type of {o}.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality -->
+    <!-- https://kgraph.foo/onto/kgdmcar#RelationshipToCardinality -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#RelationshipToCardinality">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#RelationshipToCardinality">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Relationship"/>
         <rdfs:range>
             <rdfs:Datatype>
                 <owl:oneOf>
@@ -262,28 +286,28 @@
                 </owl:oneOf>
             </rdfs:Datatype>
         </rdfs:range>
-        <kgnam:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a to-cardinality of {o}.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>The {s.kgnam:FullyQualifiedName} relationship has a to-cardinality of {o}.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber -->
+    <!-- https://kgraph.foo/onto/kgdmcar#SequenceNumber -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#SequenceNumber">
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#SequenceNumber">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has a sequence number of {o}.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has a sequence number of {o}.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints -->
+    <!-- https://kgraph.foo/onto/kgdmcar#ValueConstraints -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#ValueConstraints">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute"/>
+    <owl:DatatypeProperty rdf:about="https://kgraph.foo/onto/kgdmcar#ValueConstraints">
+        <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgdmcar#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <kgnam:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has value constraints defined by: {o}.</kgnam:nlgPredicateTemplate>
+        <kgnaming:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has value constraints defined by: {o}.</kgnaming:nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
@@ -299,21 +323,21 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Attribute -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Attribute">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Attribute">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Schema"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Class -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Class">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Class">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Schema"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Namespace"/>
         <rdfs:comment>A Class is a type of schema that conventionally describes a instances of a specific type of thing, concept or event.
 
 Classes can be participants in Relationships.</rdfs:comment>
@@ -322,64 +346,70 @@ Classes can be participants in Relationships.</rdfs:comment>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Definition -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#NamedObject"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Definition">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgnaming#NamedObject"/>
         <rdfs:label>Definition</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Domain -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Domain">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Domain">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Domain</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Model -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Model">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Model">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Namespace -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Namespace">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namespace</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Relationship -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Relationship">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Relationship">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Namespace"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema -->
+    <!-- https://kgraph.foo/onto/kgdmcar#Schema -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Schema">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Definition"/>
-        <kgnam:MetaClassIsScopedWithin rdf:resource="http://www.semanticweb.org/tomk/ontologies/2025/5/kgdmcar#Namespace"/>
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgdmcar#Schema">
+        <rdfs:subClassOf rdf:resource="https://kgraph.foo/onto/kgdmcar#Definition"/>
+        <kgnaming:MetaClassIsScopedWithin rdf:resource="https://kgraph.foo/onto/kgdmcar#Namespace"/>
         <rdfs:comment>A Schema is a flattened interface consisting of attributes and their datatypes. Additionally, valid-value constraints might be associated with a particular schema.</rdfs:comment>
         <rdfs:comment>A schema is often used as an intermediary format or expression between different models. It will often represent some core instance of a thing, along with all the specific properties and features of that thing. A Mapping is normally achieved between a model and a Schema.</rdfs:comment>
         <rdfs:comment>Schemas tend not to be defined as the end-points of Relationships, and their contents (at least conventially) tend to be less normalised.</rdfs:comment>
         <rdfs:label>Schema</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- https://kgraph.foo/onto/kgnaming#NamedObject -->
+
+    <owl:Class rdf:about="https://kgraph.foo/onto/kgnaming#NamedObject"/>
 </rdf:RDF>
 
 
