@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"
-     xml:base="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"
-     xmlns:kgn="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming"
+<rdf:RDF xmlns="https://kgraph.foo/onto/kgnaming#"
+     xml:base="https://kgraph.foo/onto/kgnaming"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:kgnaming="http://www.semanticweb.org/tomk/ontologies/2025/5/kgnaming#"
-     xmlns:kgnaming1="https://kgraph.foo/onto/kgnaming#">
+     xmlns:kgnam="https://kgraph.foo/onto/kgnaming#">
     <owl:Ontology rdf:about="https://kgraph.foo/onto/kgnaming">
         <owl:versionIRI rdf:resource="https://kgraph.foo/onto/kgnaming/v1.0.0"/>
         <rdfs:comment xml:lang="en">An ontology designed to define core knowledge graph naming concepts, properties and definitions. 
@@ -42,15 +40,10 @@ The ontology sets up the notion of Namespaces, within which unique names are def
     
 
 
-    <!-- https://kgraph.foo/onto/kgnaming#MetaClassIsScopedWithin -->
-
-    <owl:AnnotationProperty rdf:about="https://kgraph.foo/onto/kgnaming#MetaClassIsScopedWithin"/>
-    
-
-
     <!-- https://kgraph.foo/onto/kgnaming#nlgPredicateTemplate -->
 
     <owl:AnnotationProperty rdf:about="https://kgraph.foo/onto/kgnaming#nlgPredicateTemplate">
+        <rdfs:comment rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Template used to construct a natural language representation of any triple employing the tagged predicate.
 
 Curly braces are used to reference objects and their (potential) properties.
@@ -85,8 +78,9 @@ Ideally the template should provide a stable and gramatically correct output, so
         <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgnaming#NamedObject"/>
         <rdfs:range rdf:resource="https://kgraph.foo/onto/kgnaming#NamedObject"/>
         <rdfs:comment>Defines a link from the child NamedObject to parent NamedObject that performs as a unique naming context. The NamedObject&apos;s names must be defined to conform to the uniqueness characteristics within the referred NamedObject.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">isScopedWithin</rdfs:label>
-        <kgnaming1:nlgPredicateTemplate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{s.kgnam:FullyQualifiedName} is scoped within the namespace defined by {o.kgnam:FullyQualifiedName}.</kgnaming1:nlgPredicateTemplate>
+        <nlgPredicateTemplate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{s.kgnam:FullyQualifiedName} is scoped within the namespace defined by {o.kgnam:FullyQualifiedName}.</nlgPredicateTemplate>
     </owl:ObjectProperty>
     
 
@@ -108,8 +102,9 @@ Ideally the template should provide a stable and gramatically correct output, so
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgnaming#NamedObject"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Description</rdfs:label>
-        <kgnaming1:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has the following description: &quot;{o}&quot;.</kgnaming1:nlgPredicateTemplate>
+        <nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} has the following description: &quot;{o}&quot;.</nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
@@ -123,8 +118,9 @@ Ideally the template should provide a stable and gramatically correct output, so
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The FullyQualifiedName is a Functional data property of the object. It should uniquely define any individual of that object.</rdfs:comment>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The full globally identifying name of the object, consisting of the Namespace and all steps down the parental hierarchy using dot-separated notation.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FullyQualifiedName</rdfs:label>
-        <kgnaming1:nlgPredicateTemplate>{o} is the Fully Qualified Name for the object identified by URI {s}</kgnaming1:nlgPredicateTemplate>
+        <nlgPredicateTemplate>{o} is the Fully Qualified Name for the object identified by URI {s}</nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
@@ -144,8 +140,9 @@ Ideally the template should provide a stable and gramatically correct output, so
         <rdfs:domain rdf:resource="https://kgraph.foo/onto/kgnaming#NamedObject"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The portion of the UniqueIdentifier that excludes the Namespace. All Names that are &quot;ScopedWithin&quot; a given Namespace must be unique.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Name</rdfs:label>
-        <kgnaming1:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is also sometimes named as &quot;{o}&quot;.</kgnaming1:nlgPredicateTemplate>
+        <nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is also sometimes named as &quot;{o}&quot;.</nlgPredicateTemplate>
     </owl:DatatypeProperty>
     
 
@@ -177,6 +174,7 @@ ShortName: An identifier unique within the confines of a parental object (see Pa
 Label: An unrestricted form of the object&apos;s ShortName, not confined as rigidly in terms of formation. 
 
 Description: A context-sensitive description of the object in terms of its enclosing parental, and namespace scopes.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NamedObject</rdfs:label>
     </owl:Class>
     
@@ -192,7 +190,8 @@ Description: A context-sensitive description of the object in terms of its enclo
 
     <rdf:Description rdf:about="https://kgraph.foo/onto/kgnaming#Label">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Label</rdfs:label>
-        <kgnaming1:nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is sometimes referred to as &quot;{o}&quot;.</kgnaming1:nlgPredicateTemplate>
+        <nlgPredicateTemplate>{s.kgnam:FullyQualifiedName} is sometimes referred to as &quot;{o}&quot;.</nlgPredicateTemplate>
+        <rdfs:isDefinedBy rdf:resource="https://kgraph.foo/onto/kgnaming"/>
     </rdf:Description>
 </rdf:RDF>
 
