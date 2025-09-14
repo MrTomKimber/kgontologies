@@ -6,6 +6,9 @@ import numpy as np
 from hashlib import md5
 import urllib.parse
 
+DATA = "http://data#"
+ENTITY = "http://entity#"
+
 def ontology_graph():
     kgdmcar_g = Graph()
     kgdmcar_g.parse ('../ontologies/kgdmcar.owl', format='xml')
@@ -22,7 +25,7 @@ def ontology_graph():
         ontology_graph.add(t)
     return ontology_graph
 
-def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
+def rdflib_graph_from_dataframe(dataframe, data_namespace=DATA):
     """Reads in a dataframe and converts it into an anonymous graph"""
 
     DATA = Namespace(data_namespace)
@@ -54,7 +57,7 @@ def rdflib_graph_from_dataframe(dataframe, data_namespace="http://data#"):
                 g.add((row_url, p_url, o_literal))
     return g
 
-def process_anonymous_data_graph(data_graph, configuration, data_namespace="http://data#", entity_namespace="http://entity#"):
+def process_anonymous_data_graph(data_graph, configuration, data_namespace=DATA, entity_namespace=ENTITY):
     DATA = Namespace(data_namespace)
     result_graph = Graph(bind_namespaces="rdflib")
     entity_catalog=dict()
@@ -297,7 +300,7 @@ def traverse_hierarchy_path(hdict, start, acc=None):
     return acc
     
 class DataNamedObject(object):
-    def __init__(self, type_uri, fully_qualified_name, label, entity_namespace="http://entity#"):
+    def __init__(self, type_uri, fully_qualified_name, label, entity_namespace=ENTITY):
         ENT = Namespace(entity_namespace)
         self.uri = ENT[f"{uuid.uuid4().hex}"].toPython()
         if label is None:

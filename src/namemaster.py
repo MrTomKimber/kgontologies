@@ -2,6 +2,8 @@ from sqlitedict import SqliteDict
 from rdflib import Namespace, URIRef, Literal
 import rdflib
 
+KGNAMROOT = "https://kgraph.foo/onto/kgnaming#"
+
 class NameMaster:
     """Simple class for providing a data-mastering service using SqliteDict."""
 
@@ -97,7 +99,7 @@ class NameMaster:
 
         return remastered
     
-    def fully_qualified_names_from_graph(self, graph, naming_namespace="https://kgraph.foo/onto/kgnaming#"):
+    def fully_qualified_names_from_graph(self, graph, naming_namespace=KGNAMROOT):
         """Given an rdflib graph, find all named entities and return a dictionary
         describing those whose URIs require updating to conform to the
         master database."""
@@ -120,7 +122,7 @@ class NameMaster:
         
         return keyvalue_pairs
     
-    def master_spec_from_rdflib_graph(self, graph, naming_namespace="https://kgraph.foo/onto/kgnaming#"):
+    def master_spec_from_rdflib_graph(self, graph, naming_namespace=KGNAMROOT):
         """Given an rdflib graph, find all named entities and return a dictionary
         describing those whose URIs require updating to conform to the
         master database."""
@@ -131,7 +133,7 @@ class NameMaster:
             remaster_transform[value] = diff_spec.get(key, value)
         return remaster_transform
     
-    def remaster_graph(self, graph, naming_namespace="https://kgraph.foo/onto/kgnaming#"):
+    def remaster_graph(self, graph, naming_namespace=KGNAMROOT):
         """Given an rdflib graph, remaster the URIs of named entities
         according to the master database."""
         remastered_graph = rdflib.Graph()
@@ -147,7 +149,7 @@ class NameMaster:
 
         return remastered_graph
     
-    def master_graph(self, graph, naming_namespace="https://kgraph.foo/onto/kgnaming#"):
+    def master_graph(self, graph, naming_namespace=KGNAM):
         remastered_graph = self.remaster_graph(graph, naming_namespace)
 
         key_values_to_master = self.fully_qualified_names_from_graph(remastered_graph, naming_namespace)
