@@ -50,6 +50,9 @@ class Serialisation(object):
         # A discrepancy between these two would cause the lineage to break.
         self.specifications=dict()
         self.fully_qualified_names_tree=dict()
+        self.glob_vars = dict()
+        for varname, varvalue in self.config['GlobalVariables'].items():
+            self.glob_vars[varname]=varvalue
 
         for named_object_definition in self.config['NamedObjects']:
             for instance in named_object_definition['Instances']:
@@ -174,6 +177,13 @@ class Serialisation(object):
             g.add(( Serialisation.DATA[f"column({url_c})"], RDFS.label, Literal(c) )) # Attach a simple label to the datatype property
             g.add(( Serialisation.DATA.row, Serialisation.DATA.has_field, Serialisation.DATA[f"column({url_c})"]))
 
+        for c in self.glob_vars.keys():
+            url_c = urllib.parse.quote(c)
+            g.add(( Serialisation.DATA[f"column({url_c})"], RDF.type, OWL.DatatypeProperty )) # Define the column as a datatype property
+            g.add(( Serialisation.DATA[f"column({url_c})"], RDFS.label, Literal(c) )) # Attach a simple label to the datatype property
+            g.add(( Serialisation.DATA.row, Serialisation.DATA.has_field, Serialisation.DATA[f"column({url_c})"]))
+        
+
         for row_i, data in dataframe.replace({np.nan: None,
                                             pd.NaT: None,
                                             pd.NA: None,
@@ -183,6 +193,14 @@ class Serialisation(object):
             row_index = Literal(row_i)
             g.add((row_url, RDF.type, Serialisation.DATA.row))
             g.add((row_url, Serialisation.DATA.row_ident, row_index))
+
+            # Populate the contents of `GlobalVariables` as pseudo-columns associated with each 
+            # data row
+            for c,v in self.glob_vars.items():
+                url_c = urllib.parse.quote(c)
+                p_url = Serialisation.DATA[f"column({url_c})"]
+                o_literal = Literal(v)
+                g.add((row_url, p_url, o_literal))
 
             for c in dataframe.columns:
                 
@@ -201,7 +219,7 @@ class Serialisation(object):
                         if c in self.multivalue_columns:
                             # Apply explosion transformation on the value presented
                             data_fetched = split_on_comma_respecting_quotes(raw_data_value)
-                            print( c, raw_data_value, data_fetched)
+                            #print( c, raw_data_value, data_fetched)
                         else:
                             data_fetched=[raw_data_value]
                     else:
@@ -212,6 +230,10 @@ class Serialisation(object):
                     for v in data_fetched:
                         o_literal = Literal(v)
                         g.add((row_url, p_url, o_literal))
+            
+            
+
+
 
         return g
     

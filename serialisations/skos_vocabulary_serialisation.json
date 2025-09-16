@@ -6,8 +6,7 @@
         "skos": "http://www.w3.org/2004/02/skos/core#"
     },
     "GlobalVariables": {
-        "GlobalVariableName": "Value",
-        "SerialisationName": "DMCAR-Vocabulary"
+        "RootNamespace" : "Vocabularies"
     },
     "NamedObjects": [
         {
@@ -17,7 +16,7 @@
                 {
                     "InstanceName": "ConceptScheme",
                     "SubjectTag": "ConceptScheme",
-                    "ParentTag": null
+                    "ParentTag": "RootNamespace"
                 }
             ]
         },
